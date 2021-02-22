@@ -5,11 +5,19 @@
     </div>
     <div class="col-xs-12">
       <label for="" class="sbw_light">.gitignore Templates</label>
-      <select class="dropdown" name="" id="">
+      <select
+        class="dropdown"
+        name=""
+        id="">
         <option
+          [ngModel]="gitIgnoreTemplates"
+          #gitIgnoreTemplates
           *ngFor="let template of gitIgnoreTemplates"
           [value]="template">{{ template }}</option>
       </select>
+      <button
+        (click)="onUpdateGitIgnores()"
+        class="btn btn-primary">Update</button>
     </div>
   </div>
 </div>

@@ -9,7 +9,7 @@ import { GithubClientService } from './services/github-client.service';
 })
 export class AppComponent implements OnInit {
   title = 'gotch-ur-github';
-  gitIgnoreTemplates: string [];
+  gitIgnoreTemplates: string[] = [];
 
   constructor(private router: Router, private client: GithubClientService) {}
 
@@ -19,9 +19,17 @@ export class AppComponent implements OnInit {
     // const parsedTree = this.router.parseUrl('/gitignore/templates/C');
     // this.logUrlTree('parsed: ', parsedTree);
     this.gitIgnoreTemplates = this.client.getGitIgnoreTemplates();
+    // this.gitIgnoreTemplates.push('test - 1');
+    // this.gitIgnoreTemplates.push('test - 2');
+    // this.gitIgnoreTemplates.push('test - 3');
     console.log('templates length: ' + this.gitIgnoreTemplates.length);
 
     //this.client.getGitIgnoreTemplate('C');
+  }
+
+  onUpdateGitIgnores() {
+    this.gitIgnoreTemplates = this.client.getGitIgnoreTemplates();
+    console.log('templates length: ' + this.gitIgnoreTemplates.length);
   }
 
   logUrlTree(name: string, tree: UrlTree) {
