@@ -1,5 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { PRIMARY_OUTLET, Router, UrlSegment, UrlSegmentGroup, UrlTree } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import {
+  PRIMARY_OUTLET,
+  Router,
+  UrlSegment,
+  UrlSegmentGroup,
+  UrlTree,
+} from '@angular/router';
+import { gitIgnoreTemplate } from './services/github-client-models';
+
 import { GithubClientService } from './services/github-client.service';
 
 @Component({
@@ -8,40 +17,60 @@ import { GithubClientService } from './services/github-client.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
+  gitIgnoreTemplate: gitIgnoreTemplate;
+  gitIngnoreTemplatesFormGroup = new FormGroup({
+    gitIgnoreTemplate: new FormControl(),
+    gitIgnoreTemplates: new FormControl(),
+  });
+
   title = 'gotch-ur-github';
   gitIgnoreTemplates: string[] = [];
+  // gitIgnoreTemplate: gitIgnoreTemplate = {
+  //   name: 'Sample',
+  //   source: 'some content explained\nand this explains it.',
+  // };
 
-  constructor(private router: Router, private client: GithubClientService) {}
+  constructor(
+    private router: Router,
+    private githubService: GithubClientService
+  ) {}
 
   ngOnInit() {
-    // const builtTree = this.router.createUrlTree(['/gitignore/templates/C']);
-    // this.logUrlTree( 'built: ', builtTree );
-    // const parsedTree = this.router.parseUrl('/gitignore/templates/C');
-    // this.logUrlTree('parsed: ', parsedTree);
-    this.gitIgnoreTemplates = this.client.getGitIgnoreTemplates();
-    // this.gitIgnoreTemplates.push('test - 1');
-    // this.gitIgnoreTemplates.push('test - 2');
-    // this.gitIgnoreTemplates.push('test - 3');
-    console.log('templates length: ' + this.gitIgnoreTemplates.length);
+    this.githubService.gitIgnoreTemplatesChanged.subscribe(
+      (ignores: string[]) => {
+        // console.log('ignores:');
+        // console.log(ignores);
+        this.gitIgnoreTemplates = ignores;
+      }
+    );
+    this.githubService.getGitIgnoreTemplates();
 
-    //this.client.getGitIgnoreTemplate('C');
+    this.githubService.currentTemplateChanged.subscribe(
+      (template: gitIgnoreTemplate) => {
+        console.log('currentTemplateChanged()');
+        console.log(template);
+        this.gitIgnoreTemplate = template;
+      }
+    );
   }
 
-  onUpdateGitIgnores() {
-    this.gitIgnoreTemplates = this.client.getGitIgnoreTemplates();
-    console.log('templates length: ' + this.gitIgnoreTemplates.length);
+  onChange(aValue) {
+    console.log('selected template changed: ');
+    console.log(this.gitIgnoreTemplate);
+    this.githubService.getGitIgnoreTemplate(this.gitIgnoreTemplate.name);
   }
 
-  logUrlTree(name: string, tree: UrlTree) {
-    const f = tree.fragment;
-    const q = tree.queryParams;
-    const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
-    const s: UrlSegment[] = g.segments;
-    console.log('name: ' + name);
-    console.log(tree);
-    console.log(f);
-    console.log(q);
-    console.log(g);
-    console.log(s);
+  onChangeBACKUP(templateName) {
+    console.log('selected template changed: ' + templateName);
+    //this.githubService.getGitIgnoreTemplate(this.currentTemplate);
+    this.githubService.getGitIgnoreTemplate(templateName);
+  }
+
+  onTest() {
+    this.gitIgnoreTemplate = {
+      name: 'Sample 2',
+      source:
+        'even more content and some content explained\nand this explains it.',
+    };
   }
 }

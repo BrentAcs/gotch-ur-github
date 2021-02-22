@@ -1,31 +1,43 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
-      Gotch Ur Github
-    </div>
-    <div class="col-xs-12">
-      <label for="" class="sbw_light">.gitignore Templates</label>
-      <select
-        class="dropdown"
-        name=""
-        id="">
-        <option
-          [ngModel]="gitIgnoreTemplates"
-          #gitIgnoreTemplates
-          *ngFor="let template of gitIgnoreTemplates"
-          [value]="template">{{ template }}</option>
-      </select>
-      <button
-        (click)="onUpdateGitIgnores()"
-        class="btn btn-primary">Update</button>
-    </div>
+    <form [formGroup]="gitIngnoreTemplatesFormGroup">
+      <div class="col-xs-12">
+        <label for="">Available .gitignore Templates: </label>
+        <select
+          class="dropdown"
+          formControlName="gitIgnoreTemplate"
+          [(ngModel)]="gitIgnoreTemplate"
+          (ngModelchange)="onChange($event.target.value)"
+          name=""
+          id=""
+        >
+          <option
+            class="dropdown-item"
+            formControlName="gitIgnoreTemplates"
+            [ngModel]="gitIgnoreTemplates"
+            #REMgitIgnoreTemplates
+            *ngFor="let template of gitIgnoreTemplates"
+            [value]="template"
+          >
+            {{ template }}
+          </option>
+        </select>
+      </div>
+      <div class="col-xs-12">
+        <p *ngIf="!gitIgnoreTemplate">Select a Template Name</p>
+        <h4 *ngIf="gitIgnoreTemplate">
+          Current Template: {{ gitIgnoreTemplate.name }}
+        </h4>
+        <textarea
+          class="green-border-focus"
+          style="min-width: 100%"
+          *ngIf="gitIgnoreTemplate"
+          rows="10"
+          readonly
+          >{{ gitIgnoreTemplate.source }}</textarea
+        >
+      </div>
+      <button class="btn btn-primary" (click)="onTest()">Test!</button>
+    </form>
   </div>
 </div>
-
-
-<!-- <select [(ngModel)]="selected" name="status" placeholder="select" (ngModelChange)="onOptionsSelected()">
-        <option *ngFor="let sta of status" [ngValue]="sta">{{sta}}</option>
-    </select>
-<div>
-  {{filtered|json}}
-</div> -->

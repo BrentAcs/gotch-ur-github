@@ -1,49 +1,43 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
+import { gitIgnoreTemplate } from './github-client-models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GithubClientService {
   private baseUrl = 'https://api.github.com';
-  // private gitIgnoreTemplates: string[] = [];
+  private gitIgnoreTemplates: string[] = [];
+  //private currentTemplate: gitIgnoreTemplate;
+  gitIgnoreTemplatesChanged = new Subject<string[]>();
+  currentTemplateChanged = new Subject<gitIgnoreTemplate>();
 
   constructor(private http: HttpClient) {}
 
   // ---- Endpoint: gitignore
-  getGitIgnoreTemplates(): string []{
+  getGitIgnoreTemplates() {
     console.log('getGitIgnoreTemplates');
-    let gitIgnoreTemplates: string [] = [];
     this.http
       .get<string[]>(this.baseUrl + '/gitignore/templates')
-      .pipe(
-        map((responseData) => {
-          const postsArray: string[] = [];
-          for (const key in responseData) {
-            postsArray.push( key );
-          }
-          return postsArray;
-        })
-      )
       .subscribe((posts) => {
-        // console.log('fetched posts:');
-        // console.log(posts);
-        gitIgnoreTemplates = posts;
-        console.log('templates (in subscribe):');
-        console.log(gitIgnoreTemplates);
+        // console.log('templates (in subscribe):');
+        // console.log(this.gitIgnoreTemplates);
+        this.gitIgnoreTemplates = posts;
+        this.gitIgnoreTemplatesChanged.next(this.gitIgnoreTemplates.slice());
       });
-      console.log('returning this many templates: ' + gitIgnoreTemplates.length);
-      return gitIgnoreTemplates;
   }
 
-  getGitIgnoreTemplate(name: string){
-    console.log('getGitIgnoreTemplate');
+  getGitIgnoreTemplate(name: string) {
+    console.log('getGitIgnoreTemplate: ' + name);
     this.http
       .get(this.baseUrl + '/gitignore/templates/' + name)
       .subscribe((posts) => {
-        console.log('fetched posts:');
-        console.log(posts);
+        // console.log('fetched posts:');
+        // console.log(posts);
+        const template = <gitIgnoreTemplate>posts;
+        this.currentTemplateChanged.next(template);
       });
   }
 }
