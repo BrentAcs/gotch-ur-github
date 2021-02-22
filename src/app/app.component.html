@@ -1,43 +1,37 @@
 <div class="container">
   <div class="row">
-    <form [formGroup]="gitIngnoreTemplatesFormGroup">
-      <div class="col-xs-12">
+    <div class="col-xs-12">
+      <div class="form-group">
         <label for="">Available .gitignore Templates: </label>
         <select
+          #gitIgnoreTemplateSelect
+          (change)="onChange(gitIgnoreTemplateSelect.value)"
           class="dropdown"
-          formControlName="gitIgnoreTemplate"
-          [(ngModel)]="gitIgnoreTemplate"
-          (ngModelchange)="onChange($event.target.value)"
-          name=""
-          id=""
+          ngModel
+          name="gitIgnoreTemplates"
+          id="gitIgnoreTemplates"
         >
           <option
             class="dropdown-item"
-            formControlName="gitIgnoreTemplates"
-            [ngModel]="gitIgnoreTemplates"
-            #REMgitIgnoreTemplates
             *ngFor="let template of gitIgnoreTemplates"
-            [value]="template"
-          >
-            {{ template }}
-          </option>
+            [value]="template">{{ template }}</option>
         </select>
+        <div class="col-xs-12">
+          <p *ngIf="!currentTemplate">Select a Template Name</p>
+          <h4 *ngIf="currentTemplate">
+            Current Template: {{ currentTemplate.name }}
+          </h4>
+          <textarea
+            class="green-border-focus"
+            style="min-width: 100%"
+            *ngIf="currentTemplate"
+            rows="10"
+            readonly
+            >{{ currentTemplate.source }}</textarea
+          >
+        </div>
+        <button class="btn btn-primary" (click)="onTest()">Test!</button>
       </div>
-      <div class="col-xs-12">
-        <p *ngIf="!gitIgnoreTemplate">Select a Template Name</p>
-        <h4 *ngIf="gitIgnoreTemplate">
-          Current Template: {{ gitIgnoreTemplate.name }}
-        </h4>
-        <textarea
-          class="green-border-focus"
-          style="min-width: 100%"
-          *ngIf="gitIgnoreTemplate"
-          rows="10"
-          readonly
-          >{{ gitIgnoreTemplate.source }}</textarea
-        >
-      </div>
-      <button class="btn btn-primary" (click)="onTest()">Test!</button>
-    </form>
+    </div>
   </div>
 </div>
