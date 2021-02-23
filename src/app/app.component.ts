@@ -11,7 +11,10 @@ import { GithubClientService } from './services/github-client.service';
 })
 export class AppComponent implements OnInit {
   title = 'gotch-ur-github';
-  currentTemplate: gitIgnoreTemplate;
+  selectedTemplate: gitIgnoreTemplate = {
+    name: '',
+    source: ''
+  };
   gitIgnoreTemplates: string[] = [];
 
   constructor(
@@ -23,7 +26,7 @@ export class AppComponent implements OnInit {
     this.githubService.gitIgnoreTemplatesChanged.subscribe(
       (ignores: string[]) => {
         this.gitIgnoreTemplates = ignores;
-        if (!this.currentTemplate) {
+        if (this.selectedTemplate.name === '') {
           this.onChange(this.gitIgnoreTemplates[0]);
         }
       }
@@ -34,7 +37,7 @@ export class AppComponent implements OnInit {
       (template: gitIgnoreTemplate) => {
         console.log('currentTemplateChanged()');
         console.log(template);
-        this.currentTemplate = template;
+        this.selectedTemplate = template;
       }
     );
   }
@@ -44,7 +47,7 @@ export class AppComponent implements OnInit {
   }
 
   onTest() {
-    this.currentTemplate = {
+    this.selectedTemplate = {
       name: 'Sample 2',
       source:
         'even more content and some content explained\nand this explains it.',

@@ -6,6 +6,7 @@
         <select
           #gitIgnoreTemplateSelect
           (change)="onChange(gitIgnoreTemplateSelect.value)"
+          [(ngModel)]="selectedTemplate.name"
           class="dropdown"
           ngModel
           name="gitIgnoreTemplates"
@@ -17,17 +18,17 @@
             [value]="template">{{ template }}</option>
         </select>
         <div class="col-xs-12">
-          <p *ngIf="!currentTemplate">Select a Template Name</p>
-          <h4 *ngIf="currentTemplate">
-            Current Template: {{ currentTemplate.name }}
+          <p *ngIf="!selectedTemplate">Select a Template Name</p>
+          <h4 *ngIf="selectedTemplate">
+            Current Template: {{ selectedTemplate.name }}
           </h4>
           <textarea
             class="green-border-focus"
             style="min-width: 100%"
-            *ngIf="currentTemplate"
+            *ngIf="selectedTemplate"
             rows="10"
             readonly
-            >{{ currentTemplate.source }}</textarea
+            >{{ selectedTemplate.source }}</textarea
           >
         </div>
         <button class="btn btn-primary" (click)="onTest()">Test!</button>
