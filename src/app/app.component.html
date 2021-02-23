@@ -8,41 +8,4 @@
       <router-outlet></router-outlet>
     </div>
   </div>
-
-  <!-- <div class="form-group">
-        <label for="">Available .gitignore Templates: </label>
-        <select
-          #gitIgnoreTemplateSelect
-          (change)="onChange(gitIgnoreTemplateSelect.value)"
-          [(ngModel)]="selectedTemplate.name"
-          class="dropdown"
-          ngModel
-          name="gitIgnoreTemplates"
-          id="gitIgnoreTemplates"
-        >
-          <option
-            class="dropdown-item"
-            *ngFor="let template of gitIgnoreTemplates"
-            [value]="template"
-          >
-            {{ template }}
-          </option>
-        </select>
-        <div class="col-xs-12">
-          <p *ngIf="!selectedTemplate">Select a Template Name</p>
-          <h4 *ngIf="selectedTemplate">
-            Current Template: {{ selectedTemplate.name }}
-          </h4>
-          <textarea
-            class="green-border-focus"
-            style="min-width: 100%; font-family: monospace"
-            *ngIf="selectedTemplate"
-            rows="10"
-            readonly
-            >{{ selectedTemplate.source }}</textarea
-          >
-        </div>
-        <button class="btn btn-primary" (click)="onTest()">Test!</button>
-      </div> -->
-  <!-- </div> -->
 </div>
