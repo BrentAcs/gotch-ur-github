@@ -11,11 +11,11 @@ import { GithubClientService } from './services/github-client.service';
 })
 export class AppComponent implements OnInit {
   title = 'gotch-ur-github';
-  selectedTemplate: gitIgnoreTemplate = {
-    name: '',
-    source: ''
-  };
-  gitIgnoreTemplates: string[] = [];
+  // selectedTemplate: gitIgnoreTemplate = {
+  //   name: '',
+  //   source: ''
+  // };
+  // gitIgnoreTemplates: string[] = [];
 
   constructor(
     private router: Router,
@@ -23,34 +23,34 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.githubService.gitIgnoreTemplatesChanged.subscribe(
-      (ignores: string[]) => {
-        this.gitIgnoreTemplates = ignores;
-        if (this.selectedTemplate.name === '') {
-          this.onChange(this.gitIgnoreTemplates[0]);
-        }
-      }
-    );
-    this.githubService.getGitIgnoreTemplates();
+    // this.githubService.gitIgnoreTemplatesChanged.subscribe(
+    //   (ignores: string[]) => {
+    //     this.gitIgnoreTemplates = ignores;
+    //     if (this.selectedTemplate.name === '') {
+    //       this.onChange(this.gitIgnoreTemplates[0]);
+    //     }
+    //   }
+    // );
+    // this.githubService.getGitIgnoreTemplates();
 
-    this.githubService.currentTemplateChanged.subscribe(
-      (template: gitIgnoreTemplate) => {
-        console.log('currentTemplateChanged()');
-        console.log(template);
-        this.selectedTemplate = template;
-      }
-    );
+    // this.githubService.currentTemplateChanged.subscribe(
+    //   (template: gitIgnoreTemplate) => {
+    //     console.log('currentTemplateChanged()');
+    //     console.log(template);
+    //     this.selectedTemplate = template;
+    //   }
+    // );
   }
 
   onChange(templateName) {
-    this.githubService.getGitIgnoreTemplate(templateName);
+    // this.githubService.getGitIgnoreTemplate(templateName);
   }
 
-  onTest() {
-    this.selectedTemplate = {
-      name: 'Sample 2',
-      source:
-        'even more content and some content explained\nand this explains it.',
-    };
-  }
+  // onTest() {
+  //   this.selectedTemplate = {
+  //     name: 'Sample 2',
+  //     source:
+  //       'even more content and some content explained\nand this explains it.',
+  //   };
+  // }
 }

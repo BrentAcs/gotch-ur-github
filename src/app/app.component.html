@@ -1,7 +1,15 @@
-<div class="container">
+<app-header></app-header>
+<div class="container-fluid" style="width: 100%">
   <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group">
+    <div class="col-xl-1">
+      <app-left-nav-bar></app-left-nav-bar>
+    </div>
+    <div class="col-xl-11">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <!-- <div class="form-group">
         <label for="">Available .gitignore Templates: </label>
         <select
           #gitIgnoreTemplateSelect
@@ -15,26 +23,19 @@
           <option
             class="dropdown-item"
             *ngFor="let template of gitIgnoreTemplates"
-            [value]="template">{{ template }}</option>
+            [value]="template"
+          >
+            {{ template }}
+          </option>
         </select>
         <div class="col-xs-12">
           <p *ngIf="!selectedTemplate">Select a Template Name</p>
           <h4 *ngIf="selectedTemplate">
             Current Template: {{ selectedTemplate.name }}
           </h4>
-          <!-- <div class="col xs-12" style="background-color: lightgray;">
-          <pre
-            class="text-info"
-            style="min-width: 100%; font-family:monospace;"
-            *ngIf="selectedTemplate"
-            rows="10"
-            readonly
-            >{{ selectedTemplate.source }}</pre
-          >
-          </div> -->
           <textarea
             class="green-border-focus"
-            style="min-width: 100%; font-family:monospace;"
+            style="min-width: 100%; font-family: monospace"
             *ngIf="selectedTemplate"
             rows="10"
             readonly
@@ -42,7 +43,6 @@
           >
         </div>
         <button class="btn btn-primary" (click)="onTest()">Test!</button>
-      </div>
-    </div>
-  </div>
+      </div> -->
+  <!-- </div> -->
 </div>
