@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { gitIgnoreTemplate } from './github-client-models';
+import { gitIgnoreTemplate } from './models/github-client-models';
 
 @Injectable({
   providedIn: 'root',

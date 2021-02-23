@@ -24,7 +24,8 @@ import { ErrorPageComponent } from './error-page/error-page.component';
       UsersComponent,
       ReposComponent,
       GitignoreTemplatesComponent,
-      ErrorPageComponent],
+      ErrorPageComponent,
+    ],
   imports: [
     BrowserModule,
     FormsModule,
