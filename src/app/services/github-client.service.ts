@@ -18,7 +18,7 @@ export class GithubClientService {
 
   // ---- Endpoint: gitignore
   getGitIgnoreTemplates() {
-    console.log('getGitIgnoreTemplates');
+    // console.log('getGitIgnoreTemplates');
     this.http
       .get<string[]>(this.baseUrl + '/gitignore/templates')
       .subscribe((posts) => {
@@ -30,7 +30,7 @@ export class GithubClientService {
   }
 
   getGitIgnoreTemplate(name: string) {
-    console.log('getGitIgnoreTemplate: ' + name);
+    //console.log('getGitIgnoreTemplate: ' + name);
     this.http
       .get(this.baseUrl + '/gitignore/templates/' + name)
       .subscribe((posts) => {

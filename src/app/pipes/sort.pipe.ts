@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SortPipe implements PipeTransform {
   transform(value: any, sortOn: string) {
-    console.log(value);
-    console.log(sortOn);
+    // console.log(value);
+    // console.log(sortOn);
     if (sortOn.length === 0) {
       return value;
     }

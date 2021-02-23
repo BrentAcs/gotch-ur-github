@@ -33,8 +33,6 @@ export class GitignoreTemplatesComponent implements OnInit {
     this.githubService.getGitIgnoreTemplates();
     this.githubService.currentTemplateChanged.subscribe(
       (template: gitIgnoreTemplate) => {
-        console.log('currentTemplateChanged()');
-        console.log(template);
         this.selectedTemplate = template;
       }
     );
