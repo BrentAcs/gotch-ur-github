@@ -10,9 +10,21 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { LeftNavBarComponent } from './left-nav-bar/left-nav-bar.component';
 import { UsersComponent } from './github/users/users.component';
+import { ReposComponent } from './github/repos/repos.component';
+import { GitignoreTemplatesComponent } from './github/gitignore-templates/gitignore-templates.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
-  declarations: [AppComponent, SortPipe, HomeComponent, HeaderComponent, LeftNavBarComponent, UsersComponent],
+  declarations: [
+      AppComponent,
+      SortPipe,
+      HomeComponent,
+      HeaderComponent,
+      LeftNavBarComponent,
+      UsersComponent,
+      ReposComponent,
+      GitignoreTemplatesComponent,
+      ErrorPageComponent],
   imports: [
     BrowserModule,
     FormsModule,
