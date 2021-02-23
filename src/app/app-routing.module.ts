@@ -12,7 +12,11 @@ const appRoutes: Routes = [
   { path: 'users', component: UsersComponent },
   { path: 'repos', component: ReposComponent },
   { path: 'gitignore-templates', component: GitignoreTemplatesComponent },
-  { path: 'not-found', component: ErrorPageComponent, data: { message: 'Page not Found!' }, },
+  {
+    path: 'not-found',
+    component: ErrorPageComponent,
+    data: { message: 'Page not Found!' },
+  },
 
   // NOTE: '**' is wildcard catch-all and should always be last entry in routing list.
   { path: '**', redirectTo: '/not-found' },
