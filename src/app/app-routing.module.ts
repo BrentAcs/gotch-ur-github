@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ErrorPageComponent } from './error-page/error-page.component';
-import { GitignoreTemplatesComponent } from './github/gitignore-templates/gitignore-templates.component';
-import { ReposComponent } from './github/repos/repos.component';
-import { UsersComponent } from './github/users/users.component';
-import { HomeComponent } from './home/home.component';
+import { GitignoreTemplatesComponent } from './content/gitignore-templates/gitignore-templates.component';
+import { ReposComponent } from './content/repos/repos.component';
+import { UsersComponent } from './content/users/users.component';
+import { HomeComponent } from './content/home/home.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
