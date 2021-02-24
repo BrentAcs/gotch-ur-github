@@ -1,71 +1,72 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-md-6 col-md-offset-3">
+    <div class="col-xs-12">
       Hello<span *ngIf="appUser.name">, {{ appUser.name }}</span>
       <span *ngIf="!appUser.name">, please sign in.</span>
       <hr />
       <!-- TODO: add validation to controls -->
-      <!-- TODO: align labels and make work prettier -->
+      <!-- TODO: change to password and add 'show' toggle  -->
+      <!-- TODO: determine be way to display the 'show/hide' functionality -->
+      <!-- <button class="btn btn-xs btn-info">show</button> -->
       <form (ngSubmit)="onSubmit()" #f="ngForm">
-        <div class="input-group">
-          <div class="col-xs-2">
-            <label for="appUserName" class="form-label"
-              >User Name:&nbsp;&nbsp;</label
-            >
+        <div class="form-group row">
+          <label for="appUserName" class="col-sm-2 col-form-label"
+            >User Name:</label
+          >
+          <div class="col-sm-4">
             <input
               type="text"
               class="form-control"
               id="appUsername"
               name="appUsername"
-              class="pull-right"
               [(ngModel)]="appUser.name"
               required
             />
           </div>
         </div>
-        <div class="input-group" style="margin-top: 15px">
-          <label for="appAccessToken" class="form-label"
-            >Access Token:&nbsp;&nbsp;</label
+        <div class="form-group row">
+          <label for="appAccessToken" class="col-sm-2 col-form-label"
+            >Access Token:</label
           >
-          <!-- TODO: change to password and add 'show' toggle  -->
-          <input
-            type="text"
-            class="form-control"
-            id="appAccessToken"
-            name="appAccessToken"
-            class="pull-right"
-            [(ngModel)]="appUser.accessToken"
-          />
-          <!-- TODO: determine be way to display the 'show/hide' functionality -->
-          &nbsp;&nbsp;<button class="btn btn-xs btn-info">show</button>
-        </div>
-        <div class="input-group" style="margin-top: 15px">
-          <label for="appSecretKey" class="form-label"
-            >Secret Key:&nbsp;&nbsp;</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="appSecretKey"
-            name="appSecretKey"
-            class="pull-right"
-            [(ngModel)]="appUser.secretKey"
-          />&nbsp;&nbsp;
-          <div class="form-check">
+          <div class="col-sm-8">
             <input
-              type="checkbox"
-              class="form-check-input"
-              id="persistSecretKey"
-              name="persistSecretKey"
-              [(ngModel)]="appUser.persistSecretKey"
+              type="text"
+              class="form-control"
+              id="appAccessToken"
+              name="appAccessToken"
+              [(ngModel)]="appUser.accessToken"
             />
-            <label for="persistSecretKey" class="form-check-label"
-              >Persists Secret Key&nbsp;&nbsp;</label
-            >
-            <span><small>&nbsp;&nbsp;* CAUTION: un-safe</small></span>
           </div>
         </div>
-        <div class="input-group" style="margin-top: 15px">
+        <div class="form-group row">
+          <label for="appSecretKey" class="col-sm-2 col-form-label"
+            >Secret Key:</label
+          >
+          <div class="col-sm-4">
+            <input
+              type="text"
+              class="form-control"
+              id="appSecretKey"
+              name="appSecretKey"
+              [(ngModel)]="appUser.secretKey"
+            />
+          </div>
+          <div class="form-check col-sm-4">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="persistSecretKey"
+                name="persistSecretKey"
+                [(ngModel)]="appUser.persistSecretKey"
+              />
+              <label class="form-check-label" for="persistSecretKey"
+                >Persists Secret Key</label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top: 15px">
           <button [disabled]="!f.valid" class="btn btn-primary" type="submit">
             Save User
           </button>

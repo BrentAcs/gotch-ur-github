@@ -21,4 +21,8 @@ export class UsersComponent implements OnInit {
     });
     this.appUserService.load();
   }
+
+  onSubmit(){
+    console.log('users form submitting...');
+  }
 }
