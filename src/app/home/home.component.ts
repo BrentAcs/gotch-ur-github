@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Subject } from 'rxjs';
 
 import { AppUserService } from '../services/app-user.service';
 import { AppUser } from '../shared/appuser.model';
@@ -10,7 +9,7 @@ import { AppUser } from '../shared/appuser.model';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('f') homeForm: NgForm;
 
   appUser: AppUser;
@@ -24,6 +23,10 @@ export class HomeComponent implements OnInit {
       this.appUser = appUser;
     });
     this.appUserService.load();
+  }
+
+  ngOnDestroy(){
+    this.appUserService.appUserChanged.unsubscribe();
   }
 
   onSubmit() {
