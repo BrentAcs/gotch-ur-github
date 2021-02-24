@@ -1,13 +1,8 @@
-//import { Injectable } from '@angular/core';
-
 import * as CryptoJS from 'crypto-js';
 
-// @Injectable({
-//   providedIn: 'root',
-// })
-// TODO: Consider changing name from service to _____ and moving to a 'shared' folder
-export abstract class CryptoService {
-  // constructor() {}
+// TODO: address this crypto.service.ts depends on 'crypto-js'. CommonJS or AMD dependencies can cause optimization bailouts.
+export class CryptoService {
+  constructor() {}
 
   static encryptAES(data, secretKey) {
     try {

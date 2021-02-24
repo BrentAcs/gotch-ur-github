@@ -3,6 +3,7 @@
     <div class="col-xs-12 col-md-6 col-md-offset-3">
       Hello<span *ngIf="appUser.name">, {{ appUser.name }}</span>
       <hr />
+      <!-- TODO: add validation to controls -->
       <!-- TODO: align labels and make work prettier -->
       <form (ngSubmit)="onSubmit()" #f="ngForm">
         <div class="input-group">
