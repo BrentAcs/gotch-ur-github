@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalStorageService } from './services/local-storage/local-storage.service';
+
+import { AppUserService } from './services/app-user.service';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +10,7 @@ import { LocalStorageService } from './services/local-storage/local-storage.serv
 export class AppComponent implements OnInit {
   encryptSecretKey = 'boobs';
 
-  constructor() {}
+  constructor(private appUserService: AppUserService) {}
 
-  ngOnInit() {
-    // try {
-    //   const en = CryptoService.encryptAES('brent', this.encryptSecretKey);
-    //   console.log(en);
-    //   const de = CryptoService.decryptAES(en, this.encryptSecretKey);
-    //   console.log(de);
-    // } catch (error) {
-    //   console.log(error);
-    //   alert(error);
-    // }
-  }
+  ngOnInit() {}
 }

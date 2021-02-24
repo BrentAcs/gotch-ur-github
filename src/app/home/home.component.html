@@ -26,6 +26,7 @@
           <label for="appAccessToken" class="form-label"
             >Access Token:&nbsp;&nbsp;</label
           >
+          <!-- TODO: change to password and add 'show' toggle  -->
           <input
             type="text"
             class="form-control"
@@ -34,6 +35,8 @@
             class="pull-right"
             [(ngModel)]="appUser.accessToken"
           />
+          <!-- TODO: determine be way to display the 'show/hide' functionality -->
+          &nbsp;&nbsp;<button class="btn btn-xs btn-info">show</button>
         </div>
         <div class="input-group" style="margin-top: 15px">
           <label for="appSecretKey" class="form-label"
