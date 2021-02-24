@@ -10,6 +10,7 @@ import { GithubClientService } from 'src/app/services/github/github-client.servi
   styleUrls: ['./gitignore-templates.component.css'],
 })
 export class GitignoreTemplatesComponent implements OnInit {
+  // TODO: Template needs styleing, in a BADDD way
   selectedTemplate: gitIgnoreTemplate = {
     name: '',
     source: '',
