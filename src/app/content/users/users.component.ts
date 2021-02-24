@@ -10,6 +10,7 @@ import { AppUser } from 'src/app/shared/appuser.model';
 })
 export class UsersComponent implements OnInit {
   appUser: AppUser;
+  currentUserName = '';
 
   constructor(private appUserService: AppUserService) {}
 
@@ -18,6 +19,7 @@ export class UsersComponent implements OnInit {
       // console.log('users, app user changed.');
       // console.log(appUser);
       this.appUser = appUser;
+      this.currentUserName = appUser.name;
     });
     this.appUserService.load();
   }
@@ -26,3 +28,4 @@ export class UsersComponent implements OnInit {
     console.log('users form submitting...');
   }
 }
+
