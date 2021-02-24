@@ -14,13 +14,6 @@ export class HomeComponent implements OnInit {
 
   appUser: AppUser = new AppUser();
 
-  // appUser: AppUser = {
-  //   name: '',
-  //   accessToken: '',
-  //   secretKey: '',
-  //   persistSecretKey: false,
-  // };
-
   constructor() {}
 
   // TODO: Determine if/how best practice for storing secret key

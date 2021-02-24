@@ -10,7 +10,6 @@ import { gitIgnoreTemplate } from './models/github-client-models';
 export class GithubClientService {
   private baseUrl = 'https://api.github.com';
   private gitIgnoreTemplates: string[] = [];
-  //private currentTemplate: gitIgnoreTemplate;
   gitIgnoreTemplatesChanged = new Subject<string[]>();
   currentTemplateChanged = new Subject<gitIgnoreTemplate>();
 
@@ -40,4 +39,6 @@ export class GithubClientService {
         this.currentTemplateChanged.next(template);
       });
   }
+
+  // ---- Endpoint: Users
 }

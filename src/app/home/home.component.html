@@ -18,6 +18,7 @@
               name="appUsername"
               class="pull-right"
               [(ngModel)]="appUser.name"
+              required
             />
           </div>
         </div>
@@ -61,8 +62,12 @@
           </div>
         </div>
         <div class="input-group" style="margin-top: 15px">
-          <button class="btn btn-primary" type="submit">Save User</button>
-          <button class="btn btn-danger" type="button" (click)="onClearUser()">Clear User</button>
+          <button [disabled]="!f.valid" class="btn btn-primary" type="submit">
+            Save User
+          </button>
+          <button class="btn btn-danger" type="button" (click)="onClearUser()">
+            Clear User
+          </button>
         </div>
       </form>
     </div>
