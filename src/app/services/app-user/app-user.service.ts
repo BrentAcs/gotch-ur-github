@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { AppUser } from '../shared/appuser.model';
-import { CryptoService } from '../services/crypto/crypto.service';
-import { LocalStorageService } from '../services/local-storage/local-storage.service';
+import { AppUser } from '../../shared/appuser.model';
+import { CryptoService } from '../crypto/crypto.service';
+import { LocalStorageService } from '../local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root',

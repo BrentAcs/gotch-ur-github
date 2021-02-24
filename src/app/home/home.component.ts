@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { AppUserService } from '../services/app-user.service';
+import { AppUserService } from '../services/app-user/app-user.service';
 import { AppUser } from '../shared/appuser.model';
 
 @Component({
