@@ -18,8 +18,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.appUserService.appUserChanged.subscribe((appUser) => {
-      console.log('home, app user changed.');
-      console.log(appUser);
+      // console.log('home, app user changed.');
+      // console.log(appUser);
       this.appUser = appUser;
     });
     this.appUserService.load();
@@ -31,13 +31,5 @@ export class HomeComponent implements OnInit {
 
   onClearUser() {
     this.appUserService.clear();
-  }
-
-  private loadAppUser() {
-    this.appUserService.load();
-  }
-
-  private saveAppUser() {
-    this.appUserService.save();
   }
 }

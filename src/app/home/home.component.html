@@ -1,8 +1,7 @@
 <div class="container-fluid" style="width: 100%">
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-      Hello<span *ngIf="appUser.name">, {{ appUser.name }}</span>
-      <span *ngIf="!appUser.name">, please sign in.</span>
+      <app-content-header></app-content-header>
       <hr />
       <!-- NOTE: bootstrap form layout: https://getbootstrap.com/docs/4.3/components/forms/?  -->
       <!-- TODO: add validation to controls -->
