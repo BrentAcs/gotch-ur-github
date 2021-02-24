@@ -1,21 +1,68 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-      Hello
-      <!-- TODO: Trying to get form to refresh name in span on user input -->
-      <!-- <span *ngIf="appUsername">, {{ appUsername }}</span> -->
-      <span>XXX {{ appUsername }} XXX</span>
+      Hello<span *ngIf="appUser.name">, {{ appUser.name }}</span>
       <hr />
+      <!-- TODO: align labels and make work prettier -->
       <form (ngSubmit)="onSubmit()" #f="ngForm">
-        <label for="appUserName">User Name:&nbsp;&nbsp;</label>
-        <input
-          type="text"
-          class="form-control"
-          id="appUsername"
-          name="appUsername"
-          class="pull-right"
-          ([ngModel])="appUsername"
-        />
+        <div class="input-group">
+          <div class="col-xs-2">
+            <label for="appUserName" class="form-label"
+              >User Name:&nbsp;&nbsp;</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="appUsername"
+              name="appUsername"
+              class="pull-right"
+              [(ngModel)]="appUser.name"
+            />
+          </div>
+        </div>
+        <div class="input-group" style="margin-top: 15px">
+          <label for="appAccessToken" class="form-label"
+            >Access Token:&nbsp;&nbsp;</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="appAccessToken"
+            name="appAccessToken"
+            class="pull-right"
+            [(ngModel)]="appUser.accessToken"
+          />
+        </div>
+        <div class="input-group" style="margin-top: 15px">
+          <label for="appSecretKey" class="form-label"
+            >Secret Key:&nbsp;&nbsp;</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="appSecretKey"
+            name="appSecretKey"
+            class="pull-right"
+            [(ngModel)]="appUser.secretKey"
+          />&nbsp;&nbsp;
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="persistSecretKey"
+              name="persistSecretKey"
+              [(ngModel)]="appUser.persistSecretKey"
+            />
+            <label for="persistSecretKey" class="form-check-label"
+              >Persists Secret Key&nbsp;&nbsp;</label
+            >
+            <span><small>&nbsp;&nbsp;* CAUTION: un-safe</small></span>
+          </div>
+        </div>
+        <div class="input-group" style="margin-top: 15px">
+          <button class="btn btn-primary" type="submit">Save User</button>
+          <button class="btn btn-danger" type="button" (click)="onClearUser()">Clear User</button>
+        </div>
       </form>
     </div>
   </div>
