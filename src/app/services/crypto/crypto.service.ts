@@ -5,7 +5,7 @@ import * as CryptoJS from 'crypto-js';
 // @Injectable({
 //   providedIn: 'root',
 // })
-// NOTE: Consider changing name from service to _____ and moving to a 'shared' folder
+// TODO: Consider changing name from service to _____ and moving to a 'shared' folder
 export abstract class CryptoService {
   // constructor() {}
 

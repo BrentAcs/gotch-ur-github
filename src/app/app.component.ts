@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CryptoService } from './services/crypto/crypto.service';
+import { LocalStorageService } from './services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +12,6 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-
-
-
     // try {
     //   const en = CryptoService.encryptAES('brent', this.encryptSecretKey);
     //   console.log(en);
