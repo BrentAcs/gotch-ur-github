@@ -1,26 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { gitIgnoreTemplate } from 'src/app/services/github/models/github-client-models';
 import { GithubClientService } from 'src/app/services/github/github-client.service';
+import { BaseContentComponent } from '../base-content/base-content.component';
 
 @Component({
   selector: 'app-gitignore-templates',
   templateUrl: './gitignore-templates.component.html',
   styleUrls: ['./gitignore-templates.component.css'],
 })
-export class GitignoreTemplatesComponent implements OnInit {
-  // TODO: Template needs styleing, in a BADDD way
+export class GitignoreTemplatesComponent extends BaseContentComponent implements OnInit, OnDestroy {
+  // TODO: Template needs style improvements
   selectedTemplate: gitIgnoreTemplate = {
     name: '',
     source: '',
   };
   gitIgnoreTemplates: string[] = [];
 
-  constructor(
-    private router: Router,
-    private githubService: GithubClientService
-  ) {}
+  constructor(protected githubService: GithubClientService) {
+    // doesn't use the UserService, so passing null.
+    super(null);
+  }
 
   ngOnInit(): void {
     this.githubService.gitIgnoreTemplatesChanged.subscribe(

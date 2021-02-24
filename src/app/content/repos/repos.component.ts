@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { AppUserService } from 'src/app/services/app-user/app-user.service';
-
-import { AppUser } from 'src/app/shared/appuser.model';
+import { BaseContentComponent } from '../base-content/base-content.component';
 
 @Component({
   selector: 'app-repos',
   templateUrl: './repos.component.html',
   styleUrls: ['./repos.component.css'],
 })
-export class ReposComponent implements OnInit {
-  appUser: AppUser;
+export class ReposComponent extends BaseContentComponent implements OnInit {
 
-  constructor(private appUserService: AppUserService) {}
+  constructor(appUserService: AppUserService) {
+    super(appUserService);
+  }
 
   ngOnInit(): void {
-    this.appUserService.appUserChanged.subscribe((appUser) => {
-      this.appUser = appUser;
-    });
+    super.ngOnInit();
   }
 }

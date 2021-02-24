@@ -1,32 +1,31 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AppUserService } from '../../services/app-user/app-user.service';
-import { AppUser } from '../../shared/appuser.model';
+import { BaseContentComponent } from '../base-content/base-content.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent extends BaseContentComponent implements OnInit, OnDestroy {
   @ViewChild('f') homeForm: NgForm;
 
-  appUser: AppUser;
-
-  constructor(private appUserService: AppUserService) {}
+  constructor( appUserService: AppUserService) {
+    super(appUserService);
+  }
 
   ngOnInit(): void {
-    this.appUserService.appUserChanged.subscribe((appUser) => {
-      // console.log('home, app user changed.');
-      // console.log(appUser);
-      this.appUser = appUser;
-    });
-    this.appUserService.load();
+    super.ngOnInit();
+  }
+
+  ngOnDestroy() {
+    super.ngOnDestroy();
   }
 
   onSubmit() {
-    this.appUserService.save();
+    super.appUserService.save();
   }
 
   onClearUser() {

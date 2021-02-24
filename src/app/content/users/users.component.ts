@@ -2,30 +2,26 @@ import { Component, OnInit } from '@angular/core';
 
 import { AppUserService } from 'src/app/services/app-user/app-user.service';
 import { AppUser } from 'src/app/shared/appuser.model';
+import { BaseContentComponent } from '../base-content/base-content.component';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
 })
-export class UsersComponent implements OnInit {
-  appUser: AppUser;
-  currentUserName = '';
+export class UsersComponent extends BaseContentComponent implements OnInit {
 
-  constructor(private appUserService: AppUserService) {}
-
-  ngOnInit(): void {
-    this.appUserService.appUserChanged.subscribe((appUser) => {
-      // console.log('users, app user changed.');
-      // console.log(appUser);
-      this.appUser = appUser;
-      this.currentUserName = appUser.name;
-    });
-    this.appUserService.load();
+  constructor(appUserService: AppUserService) {
+    super(appUserService);
+    console.log('users c-tor()');
   }
 
-  onSubmit(){
+  ngOnInit(): void {
+    console.log('users OnInit()');
+    super.ngOnInit();
+  }
+
+  onSubmit() {
     console.log('users form submitting...');
   }
 }
-
