@@ -13,12 +13,13 @@
               id="appUsername"
               name="appUsername"
               class="pull-right"
-              [ngModel]="currentUserName"
+              [ngModel]="appUser.name"
               required
             />
           </div>
         </div>
       </form>
+      <button class="btn btn btn-default" (click)="onTestClick()">Test</button>
     </div>
   </div>
 </div>

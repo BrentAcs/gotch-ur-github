@@ -17,24 +17,18 @@ export class GithubClientService {
 
   // ---- Endpoint: gitignore
   getGitIgnoreTemplates() {
-    // console.log('getGitIgnoreTemplates');
     this.http
       .get<string[]>(this.baseUrl + '/gitignore/templates')
       .subscribe((posts) => {
-        // console.log('templates (in subscribe):');
-        // console.log(this.gitIgnoreTemplates);
         this.gitIgnoreTemplates = posts;
         this.gitIgnoreTemplatesChanged.next(this.gitIgnoreTemplates.slice());
       });
   }
 
   getGitIgnoreTemplate(name: string) {
-    //console.log('getGitIgnoreTemplate: ' + name);
     this.http
       .get(this.baseUrl + '/gitignore/templates/' + name)
       .subscribe((posts) => {
-        // console.log('fetched posts:');
-        // console.log(posts);
         const template = <gitIgnoreTemplate>posts;
         this.currentTemplateChanged.next(template);
       });

@@ -25,7 +25,7 @@ export class HomeComponent extends BaseContentComponent implements OnInit, OnDes
   }
 
   onSubmit() {
-    super.appUserService.save();
+    this.appUserService.save();
   }
 
   onClearUser() {
