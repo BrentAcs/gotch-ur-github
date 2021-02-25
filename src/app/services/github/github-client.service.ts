@@ -36,4 +36,8 @@ export class GithubClientService {
   }
 
   // ---- Endpoint: Users
+  // public call: {{base_url}}/users/{{user_name}}
+  // auth'd call: {{base_url}}/user
+
+
 }
