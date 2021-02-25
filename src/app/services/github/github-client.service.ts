@@ -9,6 +9,7 @@ import { gitIgnoreTemplate } from './models/github-client-models';
 })
 export class GithubClientService {
   private baseUrl = 'https://api.github.com';
+
   private gitIgnoreTemplates: string[] = [];
   gitIgnoreTemplatesChanged = new Subject<string[]>();
   currentTemplateChanged = new Subject<gitIgnoreTemplate>();

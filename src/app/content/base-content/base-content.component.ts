@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { AppUserService } from 'src/app/services/app-user/app-user.service';
+import { GithubClientService } from 'src/app/services/github/github-client.service';
 import { AppUser } from 'src/app/shared/appuser.model';
 
 @Component({
@@ -13,7 +14,10 @@ export class BaseContentComponent implements OnInit, OnDestroy {
   appUser: AppUser;
   subscription: Subscription;
 
-  constructor(protected appUserService: AppUserService) {}
+  constructor(
+    protected appUserService: AppUserService,
+    protected githubService: GithubClientService
+  ) {}
 
   ngOnInit(): void {
     this.subscription = this.appUserService.appUserChanged.subscribe(

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { GithubClientService } from 'src/app/services/github/github-client.service';
 
 import { AppUserService } from '../../services/app-user/app-user.service';
 import { BaseContentComponent } from '../base-content/base-content.component';
@@ -9,11 +10,16 @@ import { BaseContentComponent } from '../base-content/base-content.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent extends BaseContentComponent implements OnInit, OnDestroy {
+export class HomeComponent
+  extends BaseContentComponent
+  implements OnInit, OnDestroy {
   @ViewChild('f') homeForm: NgForm;
 
-  constructor( appUserService: AppUserService) {
-    super(appUserService);
+  constructor(
+    appUserService: AppUserService,
+    githubService: GithubClientService
+  ) {
+    super(appUserService, githubService);
   }
 
   ngOnInit(): void {
