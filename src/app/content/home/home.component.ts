@@ -25,12 +25,10 @@ export class HomeComponent
   }
 
   ngOnInit(): void {
-    console.log('home OnInit');
     super.ngOnInit();
   }
 
   ngOnDestroy() {
-    console.log('home OnDestroy');
     super.ngOnDestroy();
   }
 

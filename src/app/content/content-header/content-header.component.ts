@@ -20,9 +20,4 @@ export class ContentHeaderComponent implements OnInit {
   // }
 
   ngOnInit(): void {}
-
-  // TODO: not sure if this is the best way to handle, but hey, it's work to start with.
-  onUserAccessTokenChange(event){
-    this.appSettingsService.save();
-  }
 }

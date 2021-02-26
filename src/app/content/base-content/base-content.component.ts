@@ -17,9 +17,7 @@ export class BaseContentComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('base OnInit');
-
-    // TODO: is this the correct way of doing this??
+      // TODO: is this the correct way of doing this??
     this.appUserService.appUserChanged.next(this.appUserService.appUser);
     this.appSettingsService.appSettingsChanged.next(
       this.appSettingsService.appSettings
@@ -27,6 +25,5 @@ export class BaseContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // console.log('base OnDestroy');
   }
 }

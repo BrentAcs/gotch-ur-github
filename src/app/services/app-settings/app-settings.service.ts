@@ -14,14 +14,12 @@ export class AppSettingsService {
   constructor(){}
 
   load() {
-    console.log('app settings load');
     this.appSettings.useAccessToken = JSON.parse(
       LocalStorageService.getItem(AppSettings.USE_ACCESS_TOKEN_KEY)
     );
   }
 
   save() {
-    console.log('app settings save');
     LocalStorageService.setItem(
       AppSettings.USE_ACCESS_TOKEN_KEY,
       this.appSettings.useAccessToken.toString()

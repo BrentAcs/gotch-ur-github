@@ -8,7 +8,7 @@ export class CryptoService {
     try {
       return CryptoJS.AES.encrypt(JSON.stringify(data), secretKey).toString();
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
@@ -20,7 +20,7 @@ export class CryptoService {
       }
       return data;
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 }

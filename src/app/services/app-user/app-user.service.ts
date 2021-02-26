@@ -16,7 +16,6 @@ export class AppUserService {
   constructor() {}
 
   load() {
-    console.log('app user load');
     this.appUser.name = LocalStorageService.getItem(AppUser.NAME_KEY);
     this.appUser.persistSecretKey = JSON.parse(
       LocalStorageService.getItem(AppUser.PERSIST_SECRET_KEY)
@@ -44,7 +43,6 @@ export class AppUserService {
   }
 
   save() {
-    console.log('app user save');
     LocalStorageService.setItem(AppUser.NAME_KEY, this.appUser.name);
     let persistSecretKey = 'false';
     if (this.appUser.persistSecretKey) {
@@ -65,7 +63,7 @@ export class AppUserService {
         encryptedAccessToken
       );
     } else {
-      console.log('NOT persisting access token.');
+      console.warn('NOT persisting access token.');
     }
     if (this.appUser.secretKey && this.appUser.persistSecretKey) {
       const encryptedSecretKey = CryptoService.encryptAES(
@@ -74,7 +72,7 @@ export class AppUserService {
       );
       LocalStorageService.setItem(AppUser.SECRET_KEY, encryptedSecretKey);
     } else {
-      console.log('NOT persisting secret key.');
+      console.warn('NOT persisting secret key.');
     }
   }
 
