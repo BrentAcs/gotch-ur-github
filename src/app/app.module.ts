@@ -14,9 +14,7 @@ import { GitignoreTemplatesComponent } from './content/gitignore-templates/gitig
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { HeaderComponent } from './header/header.component';
 import { ContentHeaderComponent } from './content/content-header/content-header.component';
-import { AppUserService } from './services/app-user/app-user.service';
-import { GithubClientService } from './services/github/github-client.service';
-import { LoggingInterceptorService } from './services/logging-interceptor.service';
+import { LoggingInterceptorService } from './services/logging-interceptor/logging-interceptor.service';
 
 @NgModule({
   declarations: [
