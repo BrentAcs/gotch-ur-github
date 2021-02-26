@@ -1,9 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import {
-  AppSettingsService,
-  AppUserService,
-} from './services/app-user/app-user.service';
+import { AppSettingsService } from './services/app-settings/app-settings.service';
+import { AppUserService} from './services/app-user/app-user.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +22,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // THIS IS NOTE WORKING, START HERE
 
-    co  nsole.log('header component OnDestroy()');
+    console.log('header component OnDestroy()');
+    alert('boobs!');
     this.appSettingsService.save();
   }
 }

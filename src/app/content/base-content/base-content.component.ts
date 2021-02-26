@@ -1,12 +1,11 @@
-import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import {
-  AppSettingsService,
-  AppUserService,
-} from 'src/app/services/app-user/app-user.service';
 import { GithubClientService } from 'src/app/services/github/github-client.service';
-import { AppSettings, AppUser } from 'src/app/shared/appuser.model';
+import { AppSettings } from 'src/app/shared/app-settings.model';
+import { AppUser } from 'src/app/shared/app-user.model';
+import { AppSettingsService } from 'src/app/services/app-settings/app-settings.service';
+import { AppUserService } from 'src/app/services/app-user/app-user.service';
 
 @Component({
   selector: 'app-base-content',

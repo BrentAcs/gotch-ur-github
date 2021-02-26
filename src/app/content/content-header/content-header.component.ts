@@ -1,11 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-
-import {
-  AppSettingsService,
-  AppUserService,
-} from '../../services/app-user/app-user.service';
-import { AppSettings, AppUser } from '../../shared/appuser.model';
+import { AppSettingsService } from 'src/app/services/app-settings/app-settings.service';
+import { AppUserService } from 'src/app/services/app-user/app-user.service';
+import { AppSettings } from 'src/app/shared/app-settings.model';
+import { AppUser } from 'src/app/shared/app-user.model';
 
 @Component({
   selector: 'app-content-header',

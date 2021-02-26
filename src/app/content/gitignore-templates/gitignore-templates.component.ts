@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { gitIgnoreTemplate } from 'src/app/services/github/models/github-client-models';
 import { GithubClientService } from 'src/app/services/github/github-client.service';

@@ -1,11 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AppSettingsService } from 'src/app/services/app-settings/app-settings.service';
 import { GithubClientService } from 'src/app/services/github/github-client.service';
 
-import {
-  AppSettingsService,
-  AppUserService,
-} from '../../services/app-user/app-user.service';
+import { AppUserService } from '../../services/app-user/app-user.service';
 import { BaseContentComponent } from '../base-content/base-content.component';
 
 @Component({

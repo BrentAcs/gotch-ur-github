@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { AppSettings, AppUser } from '../../shared/appuser.model';
+import { AppUser } from '../../shared/app-user.model';
 import { CryptoService } from '../crypto/crypto.service';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 
@@ -96,34 +96,5 @@ export class AppUserService {
       this.appUser.persistSecretKey.toString()
     );
     this.appUserChanged.next(this.appUser);
-  }
-}
-
-// TODO: refactor to it's own file
-@Injectable({
-  providedIn: 'root',
-})
-export class AppSettingsService {
-  appSettings: AppSettings = new AppSettings();
-  appSettingsChanged = new Subject<AppSettings>();
-
-  load() {
-    console.log('app settings load');
-    this.appSettings.useAccessToken = JSON.parse(
-      LocalStorageService.getItem(AppSettings.USE_ACCESS_TOKEN_KEY)
-    );
-  }
-
-  save() {
-    console.log('app settings save');
-    LocalStorageService.setItem(
-      AppSettings.USE_ACCESS_TOKEN_KEY,
-      this.appSettings.useAccessToken.toString()
-    );
-  }
-
-  clear() {
-    this.appSettings.reset();
-    this.save();
   }
 }

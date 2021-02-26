@@ -23,15 +23,3 @@ export class AppUser {
   static SECRET_KEY = 'appuser-secret-key';
   static PERSIST_SECRET_KEY = 'appuser-persist-secret-key';
 }
-
-// TODO: refactor to it's own file
-export class AppSettings {
-  constructor(public useAccessToken = false) {}
-
-  reset(){
-    this.useAccessToken = false;
-  }
-
-  // TODO: Is there a better best practice for this?
-  static USE_ACCESS_TOKEN_KEY = 'appsettings-use-access-token';
-}
