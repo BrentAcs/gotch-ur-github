@@ -13,7 +13,6 @@ import { AppUser } from 'src/app/shared/app-user.model';
 export class ContentHeaderComponent implements OnInit, OnDestroy {
   appUserSub: Subscription;
   appSettingsSub: Subscription;
-  // NOTE: content header needs to new up it's app user so it's not undefined.
   appUser: AppUser = new AppUser();
   appSettings: AppSettings = new AppSettings();
 
@@ -44,5 +43,11 @@ export class ContentHeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.appUserSub.unsubscribe();
     this.appSettingsSub.unsubscribe();
+  }
+
+  // TODO: fix up and use property binding.
+  onUserAccessTokenChange(event){
+    console.log('event.target.value: ' + event.target.value);
+    this.appSettingsService.appSettings.useAccessToken = event.target.value;
   }
 }

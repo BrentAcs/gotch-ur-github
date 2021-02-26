@@ -12,6 +12,7 @@
         id="useAccessToken"
         name="useAccessToken"
         [(ngModel)]="appSettings.useAccessToken"
+        (change)="onUserAccessTokenChange($event)"
       />
       <label class="form-check-label" for="persistSecretKey"
         >Use Access Token in Requests.</label
