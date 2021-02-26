@@ -23,7 +23,6 @@ export class ContentHeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    console.log('content header#OnDestroy')
     this.subscription.unsubscribe();
   }
 }

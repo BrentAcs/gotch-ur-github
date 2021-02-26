@@ -29,7 +29,6 @@ export class BaseContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('base OnDestroy()');
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

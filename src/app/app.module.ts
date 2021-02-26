@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
 import { ContentHeaderComponent } from './content/content-header/content-header.component';
 import { AppUserService } from './services/app-user/app-user.service';
 import { GithubClientService } from './services/github/github-client.service';
+import { LoggingInterceptorService } from './services/logging-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,15 @@ import { GithubClientService } from './services/github/github-client.service';
   imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule],
   exports: [],
 
-  providers: [AppUserService, GithubClientService],
+  providers: [
+    AppUserService,
+    GithubClientService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoggingInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
