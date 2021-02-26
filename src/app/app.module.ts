@@ -12,7 +12,7 @@ import { UsersComponent } from './content/users/users.component';
 import { ReposComponent } from './content/repos/repos.component';
 import { GitignoreTemplatesComponent } from './content/gitignore-templates/gitignore-templates.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
-import { HeaderComponent } from './header/header.component';
+import { AppHeaderComponent } from './app-header/app-header.component';
 import { ContentHeaderComponent } from './content/content-header/content-header.component';
 import { LoggingInterceptorService } from './services/logging-interceptor/logging-interceptor.service';
 
@@ -20,7 +20,7 @@ import { LoggingInterceptorService } from './services/logging-interceptor/loggin
   declarations: [
     AppComponent,
     SortPipe,
-    HeaderComponent,
+    AppHeaderComponent,
     HomeComponent,
     LeftNavBarComponent,
     UsersComponent,
