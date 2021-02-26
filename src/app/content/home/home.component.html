@@ -19,7 +19,7 @@
               class="form-control"
               id="appUsername"
               name="appUsername"
-              [(ngModel)]="appUser.name"
+              [(ngModel)]="appUserService.appUser.name"
               required
             />
           </div>
@@ -34,7 +34,7 @@
               class="form-control"
               id="appAccessToken"
               name="appAccessToken"
-              [(ngModel)]="appUser.accessToken"
+              [(ngModel)]="appUserService.appUser.accessToken"
             />
           </div>
         </div>
@@ -48,7 +48,7 @@
               class="form-control"
               id="appSecretKey"
               name="appSecretKey"
-              [(ngModel)]="appUser.secretKey"
+              [(ngModel)]="appUserService.appUser.secretKey"
             />
           </div>
           <div class="form-check col-sm-4">
@@ -58,7 +58,7 @@
                 type="checkbox"
                 id="persistSecretKey"
                 name="persistSecretKey"
-                [(ngModel)]="appUser.persistSecretKey"
+                [(ngModel)]="appUserService.appUser.persistSecretKey"
               />
               <label class="form-check-label" for="persistSecretKey"
                 >Persists Secret Key</label
