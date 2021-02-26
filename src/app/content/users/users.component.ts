@@ -23,10 +23,16 @@ export class UsersComponent extends BaseContentComponent implements OnInit {
     super.ngOnInit();
   }
 
+  userInfo = 'your content here....';
   onSubmit() {
-    console.log('users form submitting...');
-    // if (this.appUser.useAccessToken) {
-    // } else {
-    // }
+    const user = this.githubService.getUser().subscribe(
+      (user) => {
+        this.userInfo = JSON.stringify(user, null, 2);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+    console.log(user);
   }
 }
