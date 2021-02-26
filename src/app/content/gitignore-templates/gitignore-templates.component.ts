@@ -19,8 +19,8 @@ export class GitignoreTemplatesComponent extends BaseContentComponent implements
   gitIgnoreTemplates: string[] = [];
 
   constructor(githubService: GithubClientService) {
-    // doesn't use the UserService, so passing null.
-    super(null, githubService);
+    // doesn't use the AppUserService or AppSettingsService, so passing null.
+    super(null, null, githubService);
   }
 
   ngOnInit(): void {

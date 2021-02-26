@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { AppUserService } from 'src/app/services/app-user/app-user.service';
+import { AppSettingsService, AppUserService } from 'src/app/services/app-user/app-user.service';
 import { GithubClientService } from 'src/app/services/github/github-client.service';
 import { AppUser } from 'src/app/shared/appuser.model';
 import { BaseContentComponent } from '../base-content/base-content.component';
@@ -11,13 +11,12 @@ import { BaseContentComponent } from '../base-content/base-content.component';
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent extends BaseContentComponent implements OnInit {
-
-
   constructor(
     appUserService: AppUserService,
+    appSettingsService: AppSettingsService,
     githubService: GithubClientService
   ) {
-    super(appUserService, githubService);
+    super(appUserService, appSettingsService, githubService);
   }
 
   ngOnInit(): void {
@@ -26,8 +25,8 @@ export class UsersComponent extends BaseContentComponent implements OnInit {
 
   onSubmit() {
     console.log('users form submitting...');
-    if (this.appUser.useAccessToken) {
-    } else {
-    }
+    // if (this.appUser.useAccessToken) {
+    // } else {
+    // }
   }
 }

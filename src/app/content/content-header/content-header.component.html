@@ -5,13 +5,13 @@
     <span *ngIf="!appUser.name">, please sign in.</span>
   </div>
   <div class="form-check col-sm-9">
-    <div class="form-check">
+    <div class="form-check" *ngIf="hasAppUserService">
       <input
         class="form-check-input"
         type="checkbox"
         id="useAccessToken"
         name="useAccessToken"
-        [(ngModel)]="appUser.useAccessToken"
+        [(ngModel)]="appSettings.useAccessToken"
       />
       <label class="form-check-label" for="persistSecretKey"
         >Use Access Token in Requests.</label

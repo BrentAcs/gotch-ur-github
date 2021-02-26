@@ -1,9 +1,12 @@
 import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { AppUserService } from 'src/app/services/app-user/app-user.service';
+import {
+  AppSettingsService,
+  AppUserService,
+} from 'src/app/services/app-user/app-user.service';
 import { GithubClientService } from 'src/app/services/github/github-client.service';
-import { AppUser } from 'src/app/shared/appuser.model';
+import { AppSettings, AppUser } from 'src/app/shared/appuser.model';
 
 @Component({
   selector: 'app-base-content',
@@ -12,25 +15,38 @@ import { AppUser } from 'src/app/shared/appuser.model';
 })
 export class BaseContentComponent implements OnInit, OnDestroy {
   appUser: AppUser;
-  subscription: Subscription;
+  appUserSub: Subscription;
+  appSettings: AppSettings;
+  appSettingsSub: Subscription;
 
   constructor(
     protected appUserService: AppUserService,
+    protected appSettingsService: AppSettingsService,
     protected githubService: GithubClientService
   ) {}
 
   ngOnInit(): void {
-    this.subscription = this.appUserService.appUserChanged.subscribe(
+    this.appUserSub = this.appUserService.appUserChanged.subscribe(
       (appUser) => {
         this.appUser = appUser;
       }
     );
+    // TODO: determine best place load the appuserservice, or is this it?
     this.appUserService.load();
+
+    this.appSettingsSub = this.appSettingsService.appSettingsChanged.subscribe(
+      (appSettings) => {
+        this.appSettings = appSettings;
+      }
+    );
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (this.appUserSub) {
+      this.appUserSub.unsubscribe();
+    }
+    if (this.appSettingsSub) {
+      this.appSettingsSub.unsubscribe();
     }
   }
 }

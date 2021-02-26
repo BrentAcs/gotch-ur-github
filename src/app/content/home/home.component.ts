@@ -2,7 +2,10 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { GithubClientService } from 'src/app/services/github/github-client.service';
 
-import { AppUserService } from '../../services/app-user/app-user.service';
+import {
+  AppSettingsService,
+  AppUserService,
+} from '../../services/app-user/app-user.service';
 import { BaseContentComponent } from '../base-content/base-content.component';
 
 @Component({
@@ -17,9 +20,10 @@ export class HomeComponent
 
   constructor(
     appUserService: AppUserService,
+    appSettingsService: AppSettingsService,
     githubService: GithubClientService
   ) {
-    super(appUserService, githubService);
+    super(appUserService, appSettingsService, githubService);
   }
 
   ngOnInit(): void {

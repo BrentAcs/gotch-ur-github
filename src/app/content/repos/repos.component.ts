@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppUserService } from 'src/app/services/app-user/app-user.service';
+import { AppSettingsService, AppUserService } from 'src/app/services/app-user/app-user.service';
 import { GithubClientService } from 'src/app/services/github/github-client.service';
 import { BaseContentComponent } from '../base-content/base-content.component';
 
@@ -11,9 +11,10 @@ import { BaseContentComponent } from '../base-content/base-content.component';
 export class ReposComponent extends BaseContentComponent implements OnInit {
   constructor(
     appUserService: AppUserService,
+    appSettingsService: AppSettingsService,
     githubService: GithubClientService
   ) {
-    super(appUserService, githubService);
+    super(appUserService, appSettingsService, githubService);
   }
 
   ngOnInit(): void {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { AppUser } from '../../shared/appuser.model';
+import { AppSettings, AppUser } from '../../shared/appuser.model';
 import { CryptoService } from '../crypto/crypto.service';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 
@@ -16,6 +16,7 @@ export class AppUserService {
   constructor() {}
 
   load() {
+    console.log('app user load');
     this.appUser.name = LocalStorageService.getItem(AppUser.NAME_KEY);
     this.appUser.persistSecretKey = JSON.parse(
       LocalStorageService.getItem(AppUser.PERSIST_SECRET_KEY)
@@ -36,22 +37,23 @@ export class AppUserService {
         this.appUser.secretKey
       );
     }
-    this.appUser.useAccessToken = JSON.parse(
-      LocalStorageService.getItem(AppUser.USE_ACCESS_TOKEN_KEY)
-    );
+    // this.appUser.useAccessToken = JSON.parse(
+    //   LocalStorageService.getItem(AppUser.USE_ACCESS_TOKEN_KEY)
+    // );
     this.appUserChanged.next(this.appUser);
   }
 
   save() {
+    console.log('app user save');
     LocalStorageService.setItem(AppUser.NAME_KEY, this.appUser.name);
     let persistSecretKey = 'false';
     if (this.appUser.persistSecretKey) {
       persistSecretKey = this.appUser.persistSecretKey.toString();
     }
-    LocalStorageService.setItem(
-      AppUser.USE_ACCESS_TOKEN_KEY,
-      this.appUser.useAccessToken.toString()
-    );
+    // LocalStorageService.setItem(
+    //   AppUser.USE_ACCESS_TOKEN_KEY,
+    //   this.appUser.useAccessToken.toString()
+    // );
     LocalStorageService.setItem(AppUser.PERSIST_SECRET_KEY, persistSecretKey);
     if (this.appUser.accessToken && this.appUser.secretKey) {
       const encryptedAccessToken = CryptoService.encryptAES(
@@ -84,15 +86,44 @@ export class AppUserService {
       AppUser.ACCESS_TOKEN_KEY,
       this.appUser.accessToken
     );
-    LocalStorageService.setItem(
-      AppUser.USE_ACCESS_TOKEN_KEY,
-      this.appUser.useAccessToken.toString()
-    );
+    // LocalStorageService.setItem(
+    //   AppUser.USE_ACCESS_TOKEN_KEY,
+    //   this.appUser.useAccessToken.toString()
+    // );
     LocalStorageService.setItem(AppUser.SECRET_KEY, this.appUser.secretKey);
     LocalStorageService.setItem(
       AppUser.PERSIST_SECRET_KEY,
       this.appUser.persistSecretKey.toString()
     );
     this.appUserChanged.next(this.appUser);
+  }
+}
+
+// TODO: refactor to it's own file
+@Injectable({
+  providedIn: 'root',
+})
+export class AppSettingsService {
+  appSettings: AppSettings = new AppSettings();
+  appSettingsChanged = new Subject<AppSettings>();
+
+  load() {
+    console.log('app settings load');
+    this.appSettings.useAccessToken = JSON.parse(
+      LocalStorageService.getItem(AppSettings.USE_ACCESS_TOKEN_KEY)
+    );
+  }
+
+  save() {
+    console.log('app settings save');
+    LocalStorageService.setItem(
+      AppSettings.USE_ACCESS_TOKEN_KEY,
+      this.appSettings.useAccessToken.toString()
+    );
+  }
+
+  clear() {
+    this.appSettings.reset();
+    this.save();
   }
 }

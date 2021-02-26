@@ -35,8 +35,6 @@ import { LoggingInterceptorService } from './services/logging-interceptor.servic
   exports: [],
 
   providers: [
-    AppUserService,
-    GithubClientService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoggingInterceptorService,
