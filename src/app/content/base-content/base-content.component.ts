@@ -25,22 +25,30 @@ export class BaseContentComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    console.log('base OnInit');
+
     this.appUserSub = this.appUserService.appUserChanged.subscribe(
       (appUser) => {
+        console.log('base content, setting app user.')
         this.appUser = appUser;
       }
     );
-    // TODO: determine best place load the appuserservice, or is this it?
-    this.appUserService.load();
 
     this.appSettingsSub = this.appSettingsService.appSettingsChanged.subscribe(
       (appSettings) => {
+        console.log('base content, setting app settings.');
         this.appSettings = appSettings;
       }
     );
+
+    // TODO: is this the correct way of doing this??
+    this.appUserService.appUserChanged.next(this.appUserService.appUser);
+    this.appSettingsService.appSettingsChanged.next(this.appSettingsService.appSettings);
   }
 
   ngOnDestroy(): void {
+    console.log('base OnDestroy');
+
     if (this.appUserSub) {
       this.appUserSub.unsubscribe();
     }

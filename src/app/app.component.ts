@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { AppSettingsService } from './services/app-settings/app-settings.service';
-import { AppUserService} from './services/app-user/app-user.service';
+import { AppUserService } from './services/app-user/app-user.service';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +15,11 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.appUserService.load();
     this.appSettingsService.load();
   }
 
   ngOnDestroy(): void {
-
     // THIS IS NOTE WORKING, START HERE
 
     console.log('header component OnDestroy()');

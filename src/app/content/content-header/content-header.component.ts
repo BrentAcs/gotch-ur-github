@@ -34,9 +34,10 @@ export class ContentHeaderComponent implements OnInit, OnDestroy {
     );
   }
 
-  public get hasAppUserService() {
-    return this.appUserService !== null;
-  }
+  // TODO: figure out how to hide appsettings for content that doesn't use it.
+  // public get hasAppUserService() {
+  //   return this.appUserService !== null;
+  // }
 
   ngOnInit(): void {}
 
