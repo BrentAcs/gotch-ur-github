@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 
 import { AppSettingsService } from './services/app-settings/app-settings.service';
 import { AppUserService } from './services/app-user/app-user.service';
@@ -8,7 +8,7 @@ import { AppUserService } from './services/app-user/app-user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
   constructor(
     private appUserService: AppUserService,
     private appSettingsService: AppSettingsService
@@ -17,13 +17,5 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.appUserService.load();
     this.appSettingsService.load();
-  }
-
-  ngOnDestroy(): void {
-    // THIS IS NOTE WORKING, START HERE
-
-    console.log('header component OnDestroy()');
-    alert('boobs!');
-    this.appSettingsService.save();
   }
 }
