@@ -6,6 +6,7 @@ import { AppSettingsService } from './services/app-settings/app-settings.service
 import { AppUserService } from './services/app-user/app-user.service';
 import { AppUser } from './shared/app-user.model';
 import { PersistedAppUser } from './shared/persisted-app-user.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,11 @@ export class AppComponent implements OnInit {
     this.appSettingsService.load();
 
     // https://bezkoder.com/angular-10-firebase-crud/
+  }
 
+  dbPath = '/app-users';
+  appUsersRef: AngularFireList<AppUser> = null;
+  onCreate() {
     const user = new AppUser(
       'Brent',
       'Test-acces-token-please-ignore',
@@ -53,13 +58,11 @@ export class AppComponent implements OnInit {
     // console.log(persistedUser);
     // console.log(test);
 
-    const dbPath = '/app-users';
-
     // goes to c-tor
-    let appUsersRef: AngularFireList<AppUser> = null;
 
-    appUsersRef = this.firebase.list(dbPath);
-    appUsersRef.push(persistedUser).then(() => {
+    console.log('pushing to firebase');
+    this.appUsersRef = this.firebase.list(this.dbPath);
+    this.appUsersRef.push(persistedUser2).then(() => {
       console.log('Created new item successfully!');
     });
     //appUsersRef.push(persistedUser2);
@@ -92,4 +95,26 @@ export class AppComponent implements OnInit {
     // console.log('app user 2:');
     // console.log(user2);
   }
+
+  onFetch(){
+    console.log('fetching from firebase');
+
+    this.appUsersRef
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      )
+      .subscribe((data) => {
+        console.log(data);
+        // this.tutorials = data;
+      });
+
+    // appUsersRef = this.firebase.list(this.dbPath);
+    // appUsersRef.push(persistedUser).then(() => {
+    //   console.log('Created new item successfully!');
+    // });
+  }
+
 }
