@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { gitIgnoreTemplate } from 'src/app/services/github/models/github-client-models';
+import { IGitIgnoreTemplate } from 'src/app/services/github/models/git-ignore-template.model';
 import { GithubClientService } from 'src/app/services/github/github-client.service';
 import { BaseContentComponent } from '../base-content/base-content.component';
 
@@ -11,7 +11,7 @@ import { BaseContentComponent } from '../base-content/base-content.component';
 })
 export class GitignoreTemplatesComponent extends BaseContentComponent implements OnInit, OnDestroy {
   // TODO: Template needs style improvements
-  selectedTemplate: gitIgnoreTemplate = {
+  selectedTemplate: IGitIgnoreTemplate = {
     name: '',
     source: '',
   };
@@ -33,7 +33,7 @@ export class GitignoreTemplatesComponent extends BaseContentComponent implements
     );
     this.githubService.getGitIgnoreTemplates();
     this.githubService.currentTemplateChanged.subscribe(
-      (template: gitIgnoreTemplate) => {
+      (template: IGitIgnoreTemplate) => {
         this.selectedTemplate = template;
       }
     );
