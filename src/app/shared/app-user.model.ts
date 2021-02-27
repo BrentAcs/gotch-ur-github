@@ -1,5 +1,7 @@
 // TODO: Determine best practice was of handling this. a 'shared' folder on the root for models?
 export class AppUser {
+  key: string;
+
   constructor(
     public name = '',
     public accessToken = '',
@@ -8,7 +10,19 @@ export class AppUser {
     public persistSecretKey = false
   ) {}
 
+  toObject() {
+    return {
+      key: this.key,
+      name: this.name,
+      accessToken: this.accessToken,
+      useAccessToken: this.useAccessToken,
+      secretKey: this.secretKey,
+      persistSecretKey: this.persistSecretKey,
+    };
+  }
+
   reset() {
+    this.key = '';
     this.name = '';
     this.accessToken = '';
     this.useAccessToken = false;
