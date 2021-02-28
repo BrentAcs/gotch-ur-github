@@ -19,9 +19,20 @@ export class FirebaseClientService {
     return this.appUserList;
   }
 
-  get(): ApoUser{
-    this.appUserList.que
+  get(key: string){
+    //this.appUserList.query.get();
+
+    const result = this.db.object(`key/${key}`);
+    console.log('firebase client get:');
+    console.log(result);
+    console.log('firebase client get:');
+
+    return result;
   }
+
+// this.fireStore.collection('countryList', (ref) =>
+//   ref.where('population', '>=', '50000000')
+// );
 
   create(appUser: AppUser): any {
     return this.appUserList.push(appUser);

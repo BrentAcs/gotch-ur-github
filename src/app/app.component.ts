@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   constructor(
     private appUserService: AppUserService,
     private appSettingsService: AppSettingsService,
-    private firebaseService: FirebaseClientService,
+    private firebaseService: FirebaseClientService
   ) {}
 
   ngOnInit() {
@@ -26,6 +26,10 @@ export class AppComponent implements OnInit {
     this.appSettingsService.load();
 
     // https://bezkoder.com/angular-10-firebase-crud/
+    // https://www.digitalocean.com/community/tutorials/angular-firebase-crud-operations
+    // https://stackoverflow.com/questions/40038701/display-single-item-from-angularfire2-query
+    // https://jsmobiledev.com/article/firestore-angularfire2
+    // https://bezkoder.com/angular-10-firestore-crud-angularfire/
   }
 
   onCreate() {
@@ -67,8 +71,7 @@ export class AppComponent implements OnInit {
     const user11 = PersistedAppUser.fromPersisted(persistedUser2);
   }
 
-
-  onFetch(){
+  onFetch() {
     console.log('fetching from firebase');
 
     this.firebaseService
@@ -82,7 +85,20 @@ export class AppComponent implements OnInit {
       .subscribe((data) => {
         this.appUsers = data;
         console.log(data);
-      });;
+      });
+
+    this.firebaseService
+      .get('-MUabcBX74EyawTUpyL9')
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      )
+      .subscribe((data) => {
+        this.appUsers = data;
+        console.log(data);
+      });
 
     // this.appUsersRef
     //   .snapshotChanges()
@@ -97,5 +113,4 @@ export class AppComponent implements OnInit {
     //     // this.tutorials = data;
     //   });
   }
-
 }
