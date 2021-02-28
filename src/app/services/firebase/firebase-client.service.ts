@@ -1,72 +1,105 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { AppUser } from 'src/app/shared/app-user.model';
+
+// https://bezkoder.com/angular-10-firebase-crud/
+// https://www.digitalocean.com/community/tutorials/angular-firebase-crud-operations
+// https://stackoverflow.com/questions/40038701/display-single-item-from-angularfire2-query
+// https://jsmobiledev.com/article/firestore-angularfire2
+// https://bezkoder.com/angular-10-firestore-crud-angularfire/
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseClientService {
-  appUserList: AngularFireList<AppUser> = null;
-  dbPath = '/app-users';
+  // appUserList: AngularFireList<AppUser> = null;
+  readonly appUserCollectionName = 'app-users';
+  //  _appUsers = null;
 
-  constructor(private db: AngularFireDatabase) {
-    this.appUserList = db.list(this.dbPath);
-  }
-
-  getAll(): AngularFireList<AppUser> {
-    return this.appUserList;
-  }
-
-  get(key: string){
-    //this.appUserList.query.get();
-
-    const result = this.db.object(`key/${key}`);
-    console.log('firebase client get:');
-    console.log(result);
-    console.log('firebase client get:');
-
-    return result;
-  }
-
-// this.fireStore.collection('countryList', (ref) =>
-//   ref.where('population', '>=', '50000000')
-// );
-
-  create(appUser: AppUser): any {
-    return this.appUserList.push(appUser);
-  }
-
-  update(key: string, value: any): Promise<void> {
-    return this.appUserList.update(key, value);
-  }
-
-  delete(key: string): Promise<void> {
-    return this.appUserList.remove(key);
-  }
-
-  deleteAll(): Promise<void> {
-    return this.appUserList.remove();
-  }
-
-  // private baseUrl = 'https://gotchurgithub-default-rtdb.firebaseio.com/';
-  // private appUsersCol = 'app-users.json';
-
-  // constructor(private http: HttpClient) {}
-
-  // postAppUser(appUser: AppUser) {
-  //   this.http
-  //     .post(this.baseUrl + this.appUsersCol, appUser)
-  //     .subscribe((response) => {
-  //       console.log(response);
-  //     }),
-  //     (error) => {
-  //       console.error(error);
-  //     };
+  // constructor(private db: AngularFireDatabase) {
+  //   this.appUserList = db.list(this.dbPath);
   // }
 
-  // getAppUser(name: string){
-  //   // this.http.get<PersistedAppUser>(this.baseUrl + this.appUsersCol);
+  constructor(private _fs: AngularFirestore){
+    // TODO: this might not be the best place, but it's a start
+    // this._appUsers = _fs.collection(this.appUserCollectionName).snapshotChanges();
+    // console.log('this._appUsers');
+    // console.log(this._appUsers);
+  }
+
+  createAppUser(appUser: AppUser){
+    return this._fs.collection(this.appUserCollectionName).add(appUser);
+  }
+
+  readAppUsers(){
+    return this._fs.collection(this.appUserCollectionName).snapshotChanges();
+  }
+
+  updateAppUser(appUser: AppUser){
+    delete appUser.id;
+    this._fs.doc(this.appUserCollectionName + '/' + appUser.id ).update(appUser);
+  }
+
+  deleteAppUser(appUserId: string){
+    this._fs.doc(this.appUserCollectionName + '/' + appUserId).delete();
+  }
+
+
+  // findAppUsers(): Observable<AppUser[]>{
+  //   return this._db.list(this.appUserCollectionName)
+  //     .do()
+  // }
+
+  // findAllAppUsers(): Observable<AppUser[]> {
+  //   return this._fs
+  //     .list(this.appUserCollectionName)
+  //     .valueChanges()
+  //     .pipe(
+  //       map((data) => {
+  //         console.log(data);
+  //         return data;
+  //       })
+  //     ) as Observable<AppUser[]>;
+  // }
+
+  // constructor(private fb: FirebaseApp) {}
+
+  // getAll(): AngularFireList<AppUser> {
+  //   // return this.appUserList;
+  //   throw new Error('Not Implemented!');
+  // }
+
+  // get(key: string) {
+  //   //this.appUserList.query.get();
+
+  //   // const result = this.db.object(`key/${key}`);
+  //   // console.log('firebase client get:');
+  //   // console.log(result);
+  //   // console.log('firebase client get:');
+
+  //   // return result;
+  //   throw new Error('Not Implemented!');
+  // }
+
+  // create(appUser: AppUser): any {
+  //   //this._db.collection('app_users').doc
+  //   // return this.appUserList.push(appUser);
+  //   // throw new Error('Not Implemented!');
+  // }
+
+  // update(key: string, value: any): Promise<void> {
+  //   // return this.appUserList.update(key, value);
+  //   throw new Error('Not Implemented!');
+  // }
+
+  // delete(key: string): Promise<void> {
+  //   // return this.appUserList.remove(key);
+  //   throw new Error('Not Implemented!');
+  // }
+
+  // deleteAll(): Promise<void> {
+  //   // return this.appUserList.remove();
+  //   throw new Error('Not Implemented!');
   // }
 }

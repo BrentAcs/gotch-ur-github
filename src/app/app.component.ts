@@ -3,9 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppSettingsService } from './services/app-settings/app-settings.service';
 import { AppUserService } from './services/app-user/app-user.service';
 import { AppUser } from './shared/app-user.model';
-import { PersistedAppUser } from './shared/persisted-app-user.model';
 import { FirebaseClientService } from './services/firebase/firebase-client.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -13,104 +11,94 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  appUsers = null;
+  _appUsers: AppUser[] = [];
 
   constructor(
     private appUserService: AppUserService,
     private appSettingsService: AppSettingsService,
-    private firebaseService: FirebaseClientService
+    private _fs: FirebaseClientService
   ) {}
 
   ngOnInit() {
     this.appUserService.load();
     this.appSettingsService.load();
 
-    // https://bezkoder.com/angular-10-firebase-crud/
-    // https://www.digitalocean.com/community/tutorials/angular-firebase-crud-operations
-    // https://stackoverflow.com/questions/40038701/display-single-item-from-angularfire2-query
-    // https://jsmobiledev.com/article/firestore-angularfire2
-    // https://bezkoder.com/angular-10-firestore-crud-angularfire/
+    this._fs.readAppUsers().subscribe((data) => {
+      this._appUsers = data.map((ele) => {
+        return {
+          id: ele.payload.doc.id,
+          // for 'as {}', see: https://stackoverflow.com/questions/51189388/typescript-spread-types-may-only-be-created-from-object-types/51193091
+          ...(ele.payload.doc.data() as {}),
+        } as AppUser;
+      });
+    });
+
+
+    // this.policyService.getPolicies().subscribe((data) => {
+    //   this.policies = data.map((e) => {
+    //     return {
+    //       id: e.payload.doc.id,
+    //       ...e.payload.doc.data(),
+    //     } as Policy;
+    //   });
+    // });
   }
 
   onCreate() {
-    const user = new AppUser(
-      'Brent',
-      'Test-acces-token-please-ignore',
-      true,
-      'kitty',
-      true
-    );
-    const user2 = new AppUser(
-      'Connor',
-      'Test-acces-token-please-ignore-2',
-      true,
-      'lucas',
-      true
-    );
-
-    const persistedUser = PersistedAppUser.toPersisted(user);
-    const persistedUser2 = PersistedAppUser.toPersisted(user2);
-
-    console.log('persistedUser before');
-    console.log(persistedUser);
-    this.firebaseService.create(persistedUser);
-    console.log(persistedUser);
-
-    console.log('persistedUser2 before');
-    console.log(persistedUser2);
-    this.firebaseService.create(persistedUser2);
-    console.log(persistedUser2);
-
-    // console.log('pushing to firebase');
-    // this.appUsersRef = this.firebase.list(this.dbPath);
-    // this.appUsersRef.push(persistedUser2).then(() => {
-    //   console.log('Created new item successfully!');
-    // });
-
-    const user10 = PersistedAppUser.fromPersisted(persistedUser);
-    const user11 = PersistedAppUser.fromPersisted(persistedUser2);
+    // const user = new AppUser(
+    //   'Brent',
+    //   'Test-acces-token-please-ignore',
+    //   true,
+    //   'kitty',
+    //   true
+    // );
+    // const user2 = new AppUser(
+    //   'Connor',
+    //   'Test-acces-token-please-ignore-2',
+    //   true,
+    //   'lucas',
+    //   true
+    // );
+    // const persistedUser = PersistedAppUser.toPersisted(user);
+    // const persistedUser2 = PersistedAppUser.toPersisted(user2);
+    // console.log('persistedUser before');
+    // console.log(persistedUser);
+    // this.firebaseService.create(persistedUser);
+    // console.log(persistedUser);
+    // console.log('persistedUser2 before');
+    // console.log(persistedUser2);
+    // this.firebaseService.create(persistedUser2);
+    // console.log(persistedUser2);
+    // const user10 = PersistedAppUser.fromPersisted(persistedUser);
+    // const user11 = PersistedAppUser.fromPersisted(persistedUser2);
   }
 
   onFetch() {
     console.log('fetching from firebase');
+    console.log(this._appUsers);
 
-    this.firebaseService
-      .getAll()
-      .snapshotChanges()
-      .pipe(
-        map((changes) =>
-          changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
-        )
-      )
-      .subscribe((data) => {
-        this.appUsers = data;
-        console.log(data);
-      });
+    // this.appUsers = this.firebaseService.findAppUsers();
+    // console.log(this.appUsers);
 
-    this.firebaseService
-      .get('-MUabcBX74EyawTUpyL9')
-      .snapshotChanges()
-      .pipe(
-        map((changes) =>
-          changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
-        )
-      )
-      .subscribe((data) => {
-        this.appUsers = data;
-        console.log(data);
-      });
-
-    // this.appUsersRef
+    // this.firebaseService
+    //   .getAll()
     //   .snapshotChanges()
     //   .pipe(
     //     map((changes) =>
     //       changes.map((c) => ({ key: c.payload.key, ...c.payload.val() }))
     //     )
     //   )
-
     //   .subscribe((data) => {
+    //     this.appUsers = data;
     //     console.log(data);
-    //     // this.tutorials = data;
+    //   });
+
+    // this.firebaseService
+    //   .get('-MUabcBX74EyawTUpyL9')
+    //   .snapshotChanges()
+    //   .subscribe((data) => {
+    //     this.appUsers = data;
+    //     console.log(data);
     //   });
   }
 }

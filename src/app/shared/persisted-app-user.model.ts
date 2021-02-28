@@ -3,6 +3,7 @@ import { AppUser } from './app-user.model';
 
 export class PersistedAppUser extends AppUser {
   static toPersisted(appUser: AppUser) {
+    console.warn('move this to AppUser and call it "encrypt"');
     let persistedUser = new PersistedAppUser();
 
     persistedUser.name = appUser.name;
@@ -25,6 +26,7 @@ export class PersistedAppUser extends AppUser {
   }
 
   static fromPersisted(persistedUser: PersistedAppUser) {
+    console.warn('move this to AppUser and call it "decrypt"');
     let appUser = new AppUser();
 
     appUser.name = persistedUser.name;

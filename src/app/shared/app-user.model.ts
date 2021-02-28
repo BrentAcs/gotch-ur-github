@@ -1,7 +1,8 @@
 // TODO: Determine best practice was of handling this. a 'shared' folder on the root for models?
 export class AppUser {
-  key = null;
+  id = null;
 
+  // TODO: remove 'useAccessToken' and add a 'Use Public API' to header for calls.
   constructor(
     public name = '',
     public accessToken = '',
@@ -12,7 +13,7 @@ export class AppUser {
 
   toObject() {
     return {
-      key: this.key,
+      key: this.id,
       name: this.name,
       accessToken: this.accessToken,
       useAccessToken: this.useAccessToken,
@@ -22,7 +23,7 @@ export class AppUser {
   }
 
   reset() {
-    this.key = null;
+    this.id = null;
     this.name = '';
     this.accessToken = '';
     this.useAccessToken = false;
