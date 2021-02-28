@@ -1,4 +1,4 @@
-import { CryptoService } from "../services/crypto/crypto.service";
+import { CryptoService } from '../services/crypto/crypto.service';
 
 // TODO: Determine best practice was of handling this. a 'shared' folder on the root for models?
 export class AppUser {
@@ -33,7 +33,7 @@ export class AppUser {
     this.persistSecretKey = false;
   }
 
-  encrypt(appUser: AppUser) {
+  static encrypt(appUser: AppUser) {
     let newAppUser = new AppUser();
 
     newAppUser.name = appUser.name;
@@ -55,7 +55,7 @@ export class AppUser {
     return newAppUser;
   }
 
-  decrypt(appUser: AppUser) {
+  static decrypt(appUser: AppUser) {
     let newAppUser = new AppUser();
 
     newAppUser.name = appUser.name;

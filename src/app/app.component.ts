@@ -22,11 +22,12 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.appUserService.load().subscribe((data) => {
       this.appUserService.appUsers = data.map((ele) => {
-        const appUser = {
+        const encryptedAppUser = {
           id: ele.payload.doc.id,
           // for 'as {}', see: https://stackoverflow.com/questions/51189388/typescript-spread-types-may-only-be-created-from-object-types/51193091
           ...(ele.payload.doc.data() as {}),
         } as AppUser;
+        const appUser = AppUser.decrypt(encryptedAppUser);
 
         if (!this.appUserService.selectedAppUser.name) {
           this.appUserService.selectedAppUser = appUser;

@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Subject } from 'rxjs';
 
 import { AppUser } from '../../shared/app-user.model';
+import { LoggingService } from '../logging-service/logging.service';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,8 @@ export class AppUsersService {
       throw new Error('App Users Service has no selected app user.');
     }
 
-    const obj = JSON.parse(JSON.stringify(this.selectedAppUser));
+    const encrypedUser = AppUser.encrypt(this.selectedAppUser);
+    const obj = JSON.parse(JSON.stringify(encrypedUser));
     delete obj.id;
     return this._firestors.collection(this.appUserCollectionName).add(obj);
   }

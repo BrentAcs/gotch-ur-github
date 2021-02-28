@@ -18,6 +18,14 @@ export abstract class LoggingService implements ILoggingService {
   abstract info(message?: any, ...optionalParams: any[]): void;
   abstract warn(message?: any, ...optionalParams: any[]): void;
   abstract error(message?: any, ...optionalParams: any[]): void;
+
+  static logObject(obj, message = null) {
+    if (message) {
+      console.log(message);
+    }
+    console.log(obj.constructor.name);
+    console.log(obj);
+  }
 }
 
 @Injectable({
