@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AppSettingsService } from 'src/app/services/app-settings/app-settings.service';
 import { GithubClientService } from 'src/app/services/github/github-client.service';
 
-import { AppUserService } from '../../services/app-user/app-user.service';
+import { AppUsersService } from '../../services/app-users/app-users.service';
 import { BaseContentComponent } from '../base-content/base-content.component';
 
 @Component({
@@ -17,11 +17,11 @@ export class HomeComponent
   @ViewChild('f') homeForm: NgForm;
 
   constructor(
-    appUserService: AppUserService,
+    appUsersService: AppUsersService,
     appSettingsService: AppSettingsService,
     githubService: GithubClientService
   ) {
-    super(appUserService, appSettingsService, githubService);
+    super(appUsersService, appSettingsService, githubService);
   }
 
   ngOnInit(): void {
@@ -33,10 +33,19 @@ export class HomeComponent
   }
 
   onSubmit() {
-    this.appUserService.save();
+    const savedUser = this.appUsersService.createAppUser().then( (appUser) => {
+      // console.log('onSubmit, new app user:');
+      // console.log(appUser);
+      // console.log('onSubmit, all app users');
+      // console.log(this.appUsersService.appUsers);
+    });
+
+
+    console.log('saved user');
+    console.log(savedUser);
   }
 
   onClearUser() {
-    this.appUserService.clear();
+    this.appUsersService.clear();
   }
 }
