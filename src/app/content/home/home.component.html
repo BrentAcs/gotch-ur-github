@@ -11,7 +11,7 @@
       <form (ngSubmit)="onSubmit()" #f="ngForm">
         <div class="form-group row">
           <label for="appUserName" class="col-sm-2 col-form-label"
-            >User Name:</label
+            >App User Name:</label
           >
           <div class="col-sm-4">
             <input
@@ -19,7 +19,7 @@
               class="form-control"
               id="appUsername"
               name="appUsername"
-              [(ngModel)]="appUserService.appUser.name"
+              [(ngModel)]="appUsersService.selectedAppUser.name"
               required
             />
           </div>
@@ -34,7 +34,7 @@
               class="form-control"
               id="appAccessToken"
               name="appAccessToken"
-              [(ngModel)]="appUserService.appUser.accessToken"
+              [(ngModel)]="appUsersService.selectedAppUser.accessToken"
             />
           </div>
         </div>
@@ -48,7 +48,7 @@
               class="form-control"
               id="appSecretKey"
               name="appSecretKey"
-              [(ngModel)]="appUserService.appUser.secretKey"
+              [(ngModel)]="appUsersService.selectedAppUser.secretKey"
             />
           </div>
           <div class="form-check col-sm-4">
@@ -58,7 +58,7 @@
                 type="checkbox"
                 id="persistSecretKey"
                 name="persistSecretKey"
-                [(ngModel)]="appUserService.appUser.persistSecretKey"
+                [(ngModel)]="appUsersService.selectedAppUser.persistSecretKey"
               />
               <label class="form-check-label" for="persistSecretKey"
                 >Persists Secret Key</label

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppSettingsService } from 'src/app/services/app-settings/app-settings.service';
-import { AppUserService } from 'src/app/services/app-user/app-user.service';
+import { AppUsersService } from 'src/app/services/app-users/app-users.service';
 
 @Component({
   selector: 'app-content-header',
@@ -9,7 +9,7 @@ import { AppUserService } from 'src/app/services/app-user/app-user.service';
 })
 export class ContentHeaderComponent implements OnInit {
   constructor(
-    public appUserService: AppUserService,
+    public appUsersService: AppUsersService,
     public appSettingsService: AppSettingsService
   ) {
     }

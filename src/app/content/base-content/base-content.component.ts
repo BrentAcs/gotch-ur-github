@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { GithubClientService } from 'src/app/services/github/github-client.service';
 import { AppSettingsService } from 'src/app/services/app-settings/app-settings.service';
-import { AppUserService } from 'src/app/services/app-user/app-user.service';
+import { AppUsersService } from 'src/app/services/app-users/app-users.service';
 
 @Component({
   selector: 'app-base-content',
@@ -11,19 +11,20 @@ import { AppUserService } from 'src/app/services/app-user/app-user.service';
 })
 export class BaseContentComponent implements OnInit, OnDestroy {
   constructor(
-    public appUserService: AppUserService,
+    public appUsersService: AppUsersService,
     public appSettingsService: AppSettingsService,
     public githubService: GithubClientService
   ) {}
 
   ngOnInit(): void {
-      // TODO: is this the correct way of doing this??
-    this.appUserService.appUserChanged.next(this.appUserService.appUser);
+    // TODO: is this the correct way of doing this??
+    this.appUsersService.selectedAppUserChanged.next(
+      this.appUsersService.selectedAppUser
+    );
     this.appSettingsService.appSettingsChanged.next(
       this.appSettingsService.appSettings
     );
   }
 
-  ngOnDestroy(): void {
-  }
+  ngOnDestroy(): void {}
 }

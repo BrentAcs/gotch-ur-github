@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { pipe } from 'rxjs';
 
 import { AppUser } from 'src/app/shared/app-user.model';
 
-// https://bezkoder.com/angular-10-firebase-crud/
-// https://www.digitalocean.com/community/tutorials/angular-firebase-crud-operations
-// https://stackoverflow.com/questions/40038701/display-single-item-from-angularfire2-query
-// https://jsmobiledev.com/article/firestore-angularfire2
-// https://bezkoder.com/angular-10-firestore-crud-angularfire/
+// Helpful resources:
+//  https://www.techiediaries.com/angular-10-firebase-database-crud/
+//  https://dottedsquirrel.com/firebase/how-to-create-and-read-things-in-firebase/
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +32,7 @@ export class FirebaseClientService {
   }
 
   readAppUsers(){
-    return this._fs.collection(this.appUserCollectionName).snapshotChanges();
+    return this._fs.collection(this.appUserCollectionName).snapshotChanges;
   }
 
   updateAppUser(appUser: AppUser){

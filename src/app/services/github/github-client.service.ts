@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { AppUserService } from '../app-user/app-user.service';
+import { AppUsersService } from '../app-users/app-users.service';
 import { IGitIgnoreTemplate } from './models/git-ignore-template.model';
 import { AppSettingsService } from '../app-settings/app-settings.service';
 import { map } from 'rxjs/operators';
@@ -24,7 +24,7 @@ export class GithubClientService {
   currentTemplateChanged = new Subject<IGitIgnoreTemplate>();
 
   constructor(
-    private appUserService: AppUserService,
+    private appUserService: AppUsersService,
     private appSettingsService: AppSettingsService,
     private http: HttpClient
   ) {}
@@ -57,7 +57,7 @@ export class GithubClientService {
       return this.http
         .get<IGitHubUserAuthd>(this.baseUrl + '/user', {
           headers: new HttpHeaders({
-            Authorization: 'token ' + this.appUserService.appUser.accessToken,
+            Authorization: 'token ' + this.appUserService.selectedAppUser.accessToken,
           }),
         })
         .pipe(
@@ -74,7 +74,7 @@ export class GithubClientService {
     } else {
       return this.http
         .get<IGitHubUserPublic>(
-          this.baseUrl + '/users/' + this.appUserService.appUser.name
+          this.baseUrl + '/users/' + this.appUserService.selectedAppUser.name
         )
         .pipe(
           map((responseData) => {

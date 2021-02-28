@@ -1,3 +1,5 @@
+import { CryptoService } from "../services/crypto/crypto.service";
+
 // TODO: Determine best practice was of handling this. a 'shared' folder on the root for models?
 export class AppUser {
   id = null;
@@ -8,12 +10,12 @@ export class AppUser {
     public accessToken = '',
     public useAccessToken = false,
     public secretKey = '',
-    public persistSecretKey = false,
+    public persistSecretKey = false
   ) {}
 
   toObject() {
     return {
-      key: this.id,
+      id: this.id,
       name: this.name,
       accessToken: this.accessToken,
       useAccessToken: this.useAccessToken,
@@ -31,10 +33,47 @@ export class AppUser {
     this.persistSecretKey = false;
   }
 
-  // TODO: Is there a better best practice for this?
-  static NAME_KEY = 'appuser-name';
-  static ACCESS_TOKEN_KEY = 'appuser-access-token';
-  static USE_ACCESS_TOKEN_KEY = 'appuser-use-access-token';
-  static SECRET_KEY = 'appuser-secret-key';
-  static PERSIST_SECRET_KEY = 'appuser-persist-secret-key';
+  encrypt(appUser: AppUser) {
+    let newAppUser = new AppUser();
+
+    newAppUser.name = appUser.name;
+    newAppUser.useAccessToken = appUser.useAccessToken;
+    newAppUser.persistSecretKey = appUser.persistSecretKey;
+    if (appUser.accessToken?.length > 0) {
+      newAppUser.accessToken = CryptoService.encryptAES(
+        appUser.accessToken,
+        appUser.secretKey
+      );
+    }
+    if (appUser.persistSecretKey) {
+      newAppUser.secretKey = CryptoService.encryptAES(
+        appUser.secretKey,
+        appUser.name
+      );
+    }
+
+    return newAppUser;
+  }
+
+  decrypt(appUser: AppUser) {
+    let newAppUser = new AppUser();
+
+    newAppUser.name = appUser.name;
+    newAppUser.useAccessToken = appUser.useAccessToken;
+    newAppUser.persistSecretKey = appUser.persistSecretKey;
+    if (appUser.secretKey?.length > 0) {
+      newAppUser.secretKey = CryptoService.decryptAES(
+        appUser.secretKey,
+        appUser.name
+      );
+    }
+    if (appUser.accessToken?.length > 0 && newAppUser.secretKey.length > 0) {
+      newAppUser.accessToken = CryptoService.decryptAES(
+        appUser.accessToken,
+        newAppUser.secretKey
+      );
+    }
+
+    return newAppUser;
+  }
 }

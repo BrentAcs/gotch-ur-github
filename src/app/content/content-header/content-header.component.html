@@ -1,8 +1,8 @@
 <div class="form-group row">
   <div class="col-sm-3">
     Hello
-    <span *ngIf="appUserService.appUser.name">, {{ appUserService.appUser.name }}</span>
-    <span *ngIf="!appUserService.appUser.name">, please sign in.</span>
+    <span *ngIf="appUsersService.selectedAppUser.name">, {{ appUsersService.selectedAppUser.name }}</span>
+    <span *ngIf="!appUsersService.selectedAppUser.name">, please sign in.</span>
   </div>
   <div class="form-check col-sm-9">
     <div class="form-check">
