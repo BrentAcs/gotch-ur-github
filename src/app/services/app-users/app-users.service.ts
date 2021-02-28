@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { AppUser } from '../../shared/app-user.model';
 
@@ -10,6 +9,11 @@ import { AppUser } from '../../shared/app-user.model';
 })
 // TODO: Determine if/how best practice for storing secret key
 export class AppUsersService {
+
+  // Helpful resources:
+  //  https://www.techiediaries.com/angular-10-firebase-database-crud/
+  //  https://dottedsquirrel.com/firebase/how-to-create-and-read-things-in-firebase/
+
   readonly appUserCollectionName = 'app-users';
 
   selectedAppUser: AppUser = new AppUser();
@@ -26,11 +30,8 @@ export class AppUsersService {
       throw new Error('App Users Service has no selected app user.');
     }
 
-    if (!this.selectedAppUser.id) {
-      this.selectedAppUser.id = this._firestors.createId();
-    }
-
     const obj = JSON.parse(JSON.stringify(this.selectedAppUser));
+    delete obj.id;
     return this._firestors.collection(this.appUserCollectionName).add(obj);
   }
 
@@ -41,25 +42,8 @@ export class AppUsersService {
   }
 
   load() {
-    console.log('app-users.service # load');
-
+    // console.log('app-users.service # load');
     return this.readAppUsers();
-
-    // this.readAppUsers().subscribe((data) => {
-    //   this.appUsers = data.map((ele) => {
-    //     const appUser = {
-    //       id: ele.payload.doc.id,
-    //       // for 'as {}', see: https://stackoverflow.com/questions/51189388/typescript-spread-types-may-only-be-created-from-object-types/51193091
-    //       ...(ele.payload.doc.data() as {}),
-    //     } as AppUser;
-
-    //     console.log('mapping app user');
-    //     return appUser;
-    //   });
-    // });
-
-    // console.log('user app service, app users: ');
-    // console.log(this.appUsers);
   }
 
   save() {

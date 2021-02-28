@@ -28,19 +28,19 @@ export class AppComponent implements OnInit {
           ...(ele.payload.doc.data() as {}),
         } as AppUser;
 
+        if (!this.appUserService.selectedAppUser.name) {
+          this.appUserService.selectedAppUser = appUser;
+        }
+
         console.log('mapping app user');
+        console.log(appUser);
         return appUser;
       });
+
+      // console.log('app comp OnInit');
+      // console.log(this.appUserService.appUsers);
     });
 
     this.appSettingsService.load();
-
-    console.log('app component, app users: ');
-    console.log(this._appUsers);
   }
-
-  // onFetch() {
-  //   console.log('fetching from firebase');
-  //   console.log(this._appUsers);
-  // }
 }

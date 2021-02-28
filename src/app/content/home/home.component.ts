@@ -33,16 +33,12 @@ export class HomeComponent
   }
 
   onSubmit() {
-    const savedUser = this.appUsersService.createAppUser().then( (appUser) => {
-      // console.log('onSubmit, new app user:');
-      // console.log(appUser);
-      // console.log('onSubmit, all app users');
-      // console.log(this.appUsersService.appUsers);
-    });
+  // TODO: going to need an 'editMode' property or similar soon
 
+    const savedUser = this.appUsersService.createAppUser();
 
-    console.log('saved user');
-    console.log(savedUser);
+    // console.log('saved user');
+    // console.log(savedUser);
   }
 
   onClearUser() {
