@@ -58,6 +58,7 @@ export class AppUser {
   static decrypt(appUser: AppUser) {
     let newAppUser = new AppUser();
 
+    newAppUser.id = appUser.id;
     newAppUser.name = appUser.name;
     newAppUser.useAccessToken = appUser.useAccessToken;
     newAppUser.persistSecretKey = appUser.persistSecretKey;

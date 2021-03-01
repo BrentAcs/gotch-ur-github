@@ -66,15 +66,55 @@
             </div>
           </div>
         </div>
+        <!-- Button Actions -->
         <div class="form-group" style="margin-top: 15px">
+          <button
+            [disabled]="f.valid"
+            class="btn btn-primary"
+            (click)="onNewUser()"
+            type="button"
+          >
+            New User
+          </button>
           <button [disabled]="!f.valid" class="btn btn-primary" type="submit">
             Save User
           </button>
-          <button class="btn btn-danger" type="button" (click)="onClearUser()">
-            Clear User
+          <button
+            [disabled]="appUsersService.selectedAppUser.name !== ''"
+            class="btn btn-danger"
+            type="button"
+            (click)="onDeleteUser()"
+          >
+            Delete User
           </button>
         </div>
       </form>
+      <hr />
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">App User Name</th>
+            <th scope="col">Access Token</th>
+            <th scope="col">Secret Key</th>
+            <th scope="col">Persist Secret Key</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let appUser of appUsersService.appUsers">
+            <th scope="row">{{ appUser.name }}</th>
+            <td>{{ appUser.accessToken }}</td>
+            <td>{{ appUser.secretKey }}</td>
+            <td>{{ appUser.persistSecretKey }}</td>
+          </tr>
+
+          <!-- <tr>
+            <th scope="row">Brent Acs</th>
+            <td>Some Access Token</td>
+            <td>Some Secret Key</td>
+            <td>true</td>
+          </tr> -->
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

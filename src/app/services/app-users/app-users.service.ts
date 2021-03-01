@@ -10,7 +10,6 @@ import { LoggingService } from '../logging-service/logging.service';
 })
 // TODO: Determine if/how best practice for storing secret key
 export class AppUsersService {
-
   // Helpful resources:
   //  https://www.techiediaries.com/angular-10-firebase-database-crud/
   //  https://dottedsquirrel.com/firebase/how-to-create-and-read-things-in-firebase/
@@ -21,7 +20,7 @@ export class AppUsersService {
   selectedAppUserChanged = new Subject<AppUser>();
   appUsers: AppUser[] = [];
 
-  constructor(private _firestors: AngularFirestore) {}
+  constructor(private _firestore: AngularFirestore) {}
 
   createAppUser() {
     console.log('creating app user in service');
@@ -34,13 +33,24 @@ export class AppUsersService {
     const encrypedUser = AppUser.encrypt(this.selectedAppUser);
     const obj = JSON.parse(JSON.stringify(encrypedUser));
     delete obj.id;
-    return this._firestors.collection(this.appUserCollectionName).add(obj);
+    return this._firestore.collection(this.appUserCollectionName).add(obj);
   }
 
   readAppUsers() {
-    return this._firestors
+    return this._firestore
       .collection(this.appUserCollectionName)
       .snapshotChanges();
+  }
+
+  updateAppUser() {
+    //   delete appUser.id;
+    //   this._fs.doc(this.appUserCollectionName + '/' + appUser.id ).update(appUser);
+  }
+
+  deleteAppUser() {
+    const appUserId = this.selectedAppUser.id;
+    this.selectedAppUser = new AppUser();
+    return this._firestore.doc(this.appUserCollectionName + '/' + appUserId).delete();
   }
 
   load() {

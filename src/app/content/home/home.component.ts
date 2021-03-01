@@ -32,16 +32,22 @@ export class HomeComponent
     super.ngOnDestroy();
   }
 
-  onSubmit() {
-  // TODO: going to need an 'editMode' property or similar soon
+  onNewUser() {}
 
-    const savedUser = this.appUsersService.createAppUser();
-
-    // console.log('saved user');
-    // console.log(savedUser);
+  onDeleteUser() {
+    this.appUsersService.deleteAppUser();
+    this.homeForm.reset();
   }
 
-  onClearUser() {
-    this.appUsersService.clear();
+  onSubmit() {
+    // TODO: going to need an 'editMode' property or similar soon
+
+    const savedUser = this.appUsersService.createAppUser().then((result) => {
+      console.log('home comp, added user:');
+      console.log(result);
+      this.appUsersService.selectedAppUser.id = result.id;
+    });
+
+    console.log(this.appUsersService.selectedAppUser);
   }
 }
