@@ -8,7 +8,7 @@ export class AppUser {
   constructor(
     public name = '',
     public accessToken = '',
-    public useAccessToken = false,
+    // public useAccessToken = false,
     public secretKey = '',
     public persistSecretKey = false
   ) {}
@@ -18,7 +18,7 @@ export class AppUser {
       id: this.id,
       name: this.name,
       accessToken: this.accessToken,
-      useAccessToken: this.useAccessToken,
+      // useAccessToken: this.useAccessToken,
       secretKey: this.secretKey,
       persistSecretKey: this.persistSecretKey,
     };
@@ -28,7 +28,7 @@ export class AppUser {
     this.id = null;
     this.name = '';
     this.accessToken = '';
-    this.useAccessToken = false;
+    // this.useAccessToken = false;
     this.secretKey = '';
     this.persistSecretKey = false;
   }
@@ -37,7 +37,7 @@ export class AppUser {
     let newAppUser = new AppUser();
 
     newAppUser.name = appUser.name;
-    newAppUser.useAccessToken = appUser.useAccessToken;
+    // newAppUser.useAccessToken = appUser.useAccessToken;
     newAppUser.persistSecretKey = appUser.persistSecretKey;
     if (appUser.accessToken?.length > 0) {
       newAppUser.accessToken = CryptoService.encryptAES(
@@ -60,7 +60,7 @@ export class AppUser {
 
     newAppUser.id = appUser.id;
     newAppUser.name = appUser.name;
-    newAppUser.useAccessToken = appUser.useAccessToken;
+    // newAppUser.useAccessToken = appUser.useAccessToken;
     newAppUser.persistSecretKey = appUser.persistSecretKey;
     if (appUser.secretKey?.length > 0) {
       newAppUser.secretKey = CryptoService.decryptAES(

@@ -68,19 +68,19 @@
         </div>
         <!-- Button Actions -->
         <div class="form-group" style="margin-top: 15px">
-          <button
+          <!-- <button
             [disabled]="f.valid"
             class="btn btn-primary"
             (click)="onNewUser()"
             type="button"
           >
             New User
-          </button>
+          </button> -->
           <button [disabled]="!f.valid" class="btn btn-primary" type="submit">
             Save User
           </button>
           <button
-            [disabled]="appUsersService.selectedAppUser.name !== ''"
+            [disabled]="!canDeleteUser()"
             class="btn btn-danger"
             type="button"
             (click)="onDeleteUser()"
@@ -90,6 +90,7 @@
         </div>
       </form>
       <hr />
+      <!-- Users Table -->
       <table class="table">
         <thead>
           <tr>
@@ -106,13 +107,6 @@
             <td>{{ appUser.secretKey }}</td>
             <td>{{ appUser.persistSecretKey }}</td>
           </tr>
-
-          <!-- <tr>
-            <th scope="row">Brent Acs</th>
-            <td>Some Access Token</td>
-            <td>Some Secret Key</td>
-            <td>true</td>
-          </tr> -->
         </tbody>
       </table>
     </div>

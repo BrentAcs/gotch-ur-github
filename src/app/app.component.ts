@@ -37,9 +37,6 @@ export class AppComponent implements OnInit {
         console.log(appUser);
         return appUser;
       });
-
-      // console.log('app comp OnInit');
-      // console.log(this.appUserService.appUsers);
     });
 
     this.appSettingsService.load();

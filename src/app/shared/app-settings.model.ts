@@ -1,10 +1,9 @@
 export class AppSettings {
-  constructor(public useAccessToken = false) {}
+  constructor(public usePublicApi = false) {}
 
   reset() {
-    this.useAccessToken = false;
+    this.usePublicApi = false;
   }
 
-  // TODO: Is there a better best practice for this?
-  static USE_ACCESS_TOKEN_KEY = 'appsettings-use-access-token';
+  static USE_PUBLIC_API = 'appsettings-use-public-api';
 }

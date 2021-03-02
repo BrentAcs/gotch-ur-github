@@ -1,21 +1,49 @@
 <div class="form-group row">
   <div class="col-sm-3">
     Hello
-    <span *ngIf="appUsersService.selectedAppUser.name">, {{ appUsersService.selectedAppUser.name }}</span>
-    <span *ngIf="!appUsersService.selectedAppUser.name">, please sign in.</span>
+    <!-- <span *ngIf="appUsersService.selectedAppUser.name">, {{ appUsersService.selectedAppUser.name }}</span>
+    <span *ngIf="!appUsersService.selectedAppUser.name">, please sign in.</span> -->
+
+
+        <div class="form-group col-md-12">
+          <label class="form-label col-sm-3" for=""
+            >Available Users:
+          </label>
+          <select
+            class="form-select col-sm-3"
+            #appUserSelect
+            (change)="onSelectedUserChange(appUserSelect.value)"
+            [(ngModel)]="appUsersService.selectedAppUser.name"
+            class="dropdown"
+            ngModel
+            name="gitIgnoreTemplates"
+            id="gitIgnoreTemplates"
+          >
+            <option
+              *ngFor="let appUser of appUsersService.appUsers"
+              [value]="appUser.id"
+            >
+              {{ appUser.name }}
+            </option>
+          </select>
+          <span class="" *ngIf="appUsersService.selectedAppUser.name === ''"
+            >Add an App User</span
+          >
+        </div>
+
   </div>
   <div class="form-check col-sm-9">
     <div class="form-check">
       <input
         class="form-check-input"
         type="checkbox"
-        id="useAccessToken"
-        name="useAccessToken"
-        [(ngModel)]="appSettingsService.appSettings.useAccessToken"
+        id="usePublicApi"
+        name="usePublicApi"
+        [(ngModel)]="appSettingsService.appSettings.usePublicApi"
         (change)="appSettingsService.save()"
       />
       <label class="form-check-label" for="persistSecretKey"
-        >Use Access Token in Requests.</label
+        >Use Public API, won't use access token.</label
       >
     </div>
   </div>

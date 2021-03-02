@@ -14,15 +14,15 @@ export class AppSettingsService {
   constructor(){}
 
   load() {
-    this.appSettings.useAccessToken = JSON.parse(
-      LocalStorageService.getItem(AppSettings.USE_ACCESS_TOKEN_KEY)
+    this.appSettings.usePublicApi = JSON.parse(
+      LocalStorageService.getItem(AppSettings.USE_PUBLIC_API)
     );
   }
 
   save() {
     LocalStorageService.setItem(
-      AppSettings.USE_ACCESS_TOKEN_KEY,
-      this.appSettings.useAccessToken.toString()
+      AppSettings.USE_PUBLIC_API,
+      this.appSettings.usePublicApi.toString()
     );
   }
 

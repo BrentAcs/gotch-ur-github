@@ -53,7 +53,7 @@ export class GithubClientService {
   // auth'd call: {{base_url}}/user
 
   getUser() {
-    if (this.appSettingsService.appSettings.useAccessToken) {
+    if (this.appSettingsService.appSettings.usePublicApi) {
       return this.http
         .get<IGitHubUserAuthd>(this.baseUrl + '/user', {
           headers: new HttpHeaders({

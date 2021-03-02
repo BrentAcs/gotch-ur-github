@@ -11,13 +11,16 @@ export class ContentHeaderComponent implements OnInit {
   constructor(
     public appUsersService: AppUsersService,
     public appSettingsService: AppSettingsService
-  ) {
-    }
+  ) {}
 
   // TODO: figure out how to hide appsettings for content that doesn't use it.
   // public get hasAppUserService() {
   //   return this.appUserService !== null;
   // }
+
+  onSelectedUserChange(appUserName){
+
+  }
 
   ngOnInit(): void {}
 }
