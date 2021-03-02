@@ -3,11 +3,11 @@
     <div class="form-group row col-sm-12">
       <div class="form-group col-sm-6">
         <label class="form-label" class="col-form-label" for="">
-          <span class="form-label" *ngIf="appUsersService.selectedAppUser.name === ''">Add an App User</span>
-          <span class="form-label" *ngIf="appUsersService.selectedAppUser.name !== ''">Available Users:</span>
+          <span class="form-label" *ngIf="!hasSelectedAppUser">Add an App User</span>
+          <span class="form-label" *ngIf="hasSelectedAppUser">Available Users:</span>
         </label>
         <select
-          *ngIf="appUsersService.selectedAppUser.name !== ''"
+          *ngIf="hasSelectedAppUser"
           class="form-select"
           #appUserSelect
           (change)="onSelectedUserChange(appUserSelect.value)"

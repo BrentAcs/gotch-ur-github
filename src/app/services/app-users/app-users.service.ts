@@ -16,14 +16,25 @@ export class AppUsersService {
 
   readonly appUserCollectionName = 'app-users';
 
-  selectedAppUser: AppUser = new AppUser();
+  selectedAppUser: AppUser = null; // = new AppUser();
   selectedAppUserChanged = new Subject<AppUser>();
   appUsers: AppUser[] = [];
 
   constructor(private _firestore: AngularFirestore) {}
 
+  newUser(){
+    if (this.selectedAppUser !== null) {
+      throw new Error('app users service a selected user!');
+    }
+    this.selectedAppUser = new AppUser();
+  }
+
   createAppUser() {
     console.log('creating app user in service');
+
+    if (this.selectedAppUser === null) {
+      throw new Error('app users service has no selected user!');
+    }
     console.log(this.selectedAppUser);
 
     if (!this.selectedAppUser) {
@@ -50,7 +61,9 @@ export class AppUsersService {
   deleteAppUser() {
     const appUserId = this.selectedAppUser.id;
     this.selectedAppUser = new AppUser();
-    return this._firestore.doc(this.appUserCollectionName + '/' + appUserId).delete();
+    return this._firestore
+      .doc(this.appUserCollectionName + '/' + appUserId)
+      .delete();
   }
 
   load() {

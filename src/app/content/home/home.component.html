@@ -15,11 +15,12 @@
           >
           <div class="col-sm-4">
             <input
+              [disabled]="!hasSelectedAppUser"
               type="text"
               class="form-control"
               id="appUsername"
               name="appUsername"
-              [(ngModel)]="appUsersService.selectedAppUser.name"
+              [(ngModel)]="selectedUserAppName"
               required
             />
           </div>
@@ -30,11 +31,12 @@
           >
           <div class="col-sm-8">
             <input
+              [disabled]="!hasSelectedAppUser"
               type="text"
               class="form-control"
               id="appAccessToken"
               name="appAccessToken"
-              [(ngModel)]="appUsersService.selectedAppUser.accessToken"
+              [(ngModel)]="selectedUserAppAccessToken"
             />
           </div>
         </div>
@@ -44,21 +46,23 @@
           >
           <div class="col-sm-4">
             <input
+              [disabled]="!hasSelectedAppUser"
               type="text"
               class="form-control"
               id="appSecretKey"
               name="appSecretKey"
-              [(ngModel)]="appUsersService.selectedAppUser.secretKey"
+              [(ngModel)]="selectedUserAppSecretKey"
             />
           </div>
           <div class="form-check col-sm-4">
             <div class="form-check">
               <input
+                [disabled]="!hasSelectedAppUser"
                 class="form-check-input"
                 type="checkbox"
                 id="persistSecretKey"
                 name="persistSecretKey"
-                [(ngModel)]="appUsersService.selectedAppUser.persistSecretKey"
+                [(ngModel)]="selectedUserAppPersistSecretKey"
               />
               <label class="form-check-label" for="persistSecretKey"
                 >Persists Secret Key</label
@@ -68,16 +72,20 @@
         </div>
         <!-- Button Actions -->
         <div class="form-group" style="margin-top: 15px">
-          <!-- <button
-            [disabled]="f.valid"
+          <button
+            [disabled]="hasSelectedAppUser"
             class="btn btn-primary"
             (click)="onNewUser()"
             type="button"
           >
             New User
-          </button> -->
-          <button [disabled]="!f.valid" class="btn btn-primary" type="submit">
-            Save User
+          </button>
+          <button
+            [disabled]="!f.valid && !hasSelectedAppUser"
+            class="btn btn-primary"
+            type="submit"
+          >
+            Save User - f.valie={{f.valid}}, hasSelected={{hasSelectedAppUser}}
           </button>
           <button
             [disabled]="!canDeleteUser()"

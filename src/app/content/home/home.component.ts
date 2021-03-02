@@ -32,13 +32,15 @@ export class HomeComponent
     super.ngOnDestroy();
   }
 
-  onNewUser() {}
+  onNewUser() {
+    this.appUsersService.newUser();
+  }
 
-  canDeleteUser(){
-    console.log('can delete user');
-    console.log(this.appUsersService.selectedAppUser);
-    const canDelete = (this.appUsersService.selectedAppUser.id !== null );
-    console.log(canDelete);
+  canDeleteUser() {
+    // console.log('can delete user');
+    // console.log(this.hasSelectedAppUser );
+    const canDelete = this.hasSelectedAppUser && this.appUsersService.selectedAppUser.id !== null;
+    // console.log(canDelete);
     return canDelete;
   }
 
