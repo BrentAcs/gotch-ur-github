@@ -1,6 +1,6 @@
 <div class="container-fluid" style="width: 100%">
   <div class="row">
-    <div class="col-xs-12 col-md-6 col-md-offset-3">
+    <div class="col-md-12">
       <app-content-header></app-content-header>
       <hr />
       <!-- NOTE: bootstrap form layout: https://getbootstrap.com/docs/4.3/components/forms/?  -->
@@ -9,10 +9,10 @@
       <!-- TODO: determine be way to display the 'show/hide' functionality -->
       <form (ngSubmit)="onSubmit()" #f="ngForm">
         <div class="form-group row">
-          <label for="userName" class="col-sm-2 col-form-label"
+          <label for="userName" class="col-md-2 col-form-label"
             >App User Name:</label
           >
-          <div class="col-sm-4">
+          <div class="col-md-4">
             <input
               [disabled]="!newUserMode"
               [(ngModel)]="userName"
@@ -26,10 +26,10 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="accessToken" class="col-sm-2 col-form-label"
+          <label for="accessToken" class="col-md-2 col-form-label"
             >Access Token:</label
           >
-          <div class="col-sm-8">
+          <div class="col-md-8">
             <input
               [disabled]="!newUserMode"
               [(ngModel)]="accessToken"
@@ -42,10 +42,10 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="secretKey" class="col-sm-2 col-form-label"
+          <label for="secretKey" class="col-md-2 col-form-label"
             >Secret Key:</label
           >
-          <div class="col-sm-4">
+          <div class="col-md-4">
             <input
               [disabled]="!newUserMode"
               [(ngModel)]="secretKey"
@@ -56,12 +56,12 @@
               #appSecretKey
             />
           </div>
-          <div class="form-check col-sm-4">
+          <div class="form-check col-md-4">
             <div class="form-check">
               <input
                 [disabled]="!newUserMode"
                 [(ngModel)]="persistSecretKey"
-                [ngModelOptions]="{standalone: true}"
+                [ngModelOptions]="{ standalone: true }"
                 class="form-check-input"
                 type="checkbox"
                 id="persistSecretKey"
@@ -88,7 +88,8 @@
             class="btn btn-primary"
             type="submit"
           >
-            Save User <!-- - f.valie='{{f.valid}}', newUserMode='{{newUserMode}}' -->
+            Save User
+            <!-- - f.valie='{{f.valid}}', newUserMode='{{newUserMode}}' -->
           </button>
           <button
             [disabled]="!canDeleteUser()"
@@ -105,10 +106,11 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">App User Name</th>
+            <th scope="col">User Name</th>
             <th scope="col">Access Token</th>
             <th scope="col">Secret Key</th>
-            <th scope="col">Persist Secret Key</th>
+            <th scope="col">Persist</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -117,6 +119,10 @@
             <td>{{ appUser.accessToken }}</td>
             <td>{{ appUser.secretKey }}</td>
             <td>{{ appUser.persistSecretKey }}</td>
+            <td>
+              <button class="btn btn-primary btn-md" type="button">Edit</button>
+              <button class="btn btn-danger btn-md" type="button">Delete</button>
+            </td>
           </tr>
         </tbody>
       </table>

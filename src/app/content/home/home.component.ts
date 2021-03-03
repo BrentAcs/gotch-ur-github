@@ -81,6 +81,7 @@ export class HomeComponent
         console.log(result);
         this.appUsersService.selectedAppUser.id = result.id;
       });
+    this.homeForm.reset();
     this.newUserMode = false;
   }
 }

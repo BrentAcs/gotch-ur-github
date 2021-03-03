@@ -1,15 +1,15 @@
 <div class="container-fluid" style="width: 100%">
   <div class="row">
-    <div class="col-xs-12 col-md-6 col-md-offset-3">
+    <div class="col-md-12">
       <app-content-header></app-content-header>
-      <hr>
+      <hr />
       <div class="form-row">
         <div class="form-group col-md-12">
-          <label class="form-label col-sm-3" for=""
+          <label class="form-label col-md-2" for=""
             >Available .gitignore Templates:
           </label>
           <select
-            class="form-select col-sm-3"
+            class="form-select col-md-3"
             #gitIgnoreTemplateSelect
             (change)="onChange(gitIgnoreTemplateSelect.value)"
             [(ngModel)]="selectedTemplate.name"
@@ -30,9 +30,9 @@
           >
         </div>
       </div>
-      <div class="col-xs-12">
+      <div class="col-md-12">
         <textarea
-          class="form-control col-sm-12"
+          class="form-control col-md-12"
           style="min-width: 100%; font-family: monospace"
           *ngIf="selectedTemplate"
           rows="20"

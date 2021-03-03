@@ -1,31 +1,32 @@
 <div class="container-fluid" style="width: 100%">
   <div class="row">
-    <div class="col-xs-12 col-md-6 col-md-offset-3">
+    <div class="col-md-12">
       <app-content-header></app-content-header>
       <hr />
       <form (ngSubmit)="onSubmit()" #f="ngForm">
         <div class="form-row">
-          <div class="col-sm-2">
+          <div class="col-md-2">
             <button type="submit" class="btn btn-primary form-control">
               Get User
             </button>
           </div>
           <br />
         </div>
-        <div class="col-sm-12">
+        <div class="col-md-12">
           <textarea
-            class="form-control col-sm-12"
+            class="form-control col-md-12"
             style="min-width: 100%; font-family: monospace"
             rows="20"
             readonly
             name="userInfo"
             [(ngModel)]="userInfo"
-            >your use info here...</textarea
+          >
+your use info here...</textarea
           >
         </div>
 
         <!-- <div class="input-group">
-          <div class="col-xs-2">
+          <div class="col-md-2">
             <label for="appUserName" class="form-label">User Name:</label>
             <input
               type="text"
