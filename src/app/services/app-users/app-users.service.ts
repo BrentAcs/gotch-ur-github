@@ -16,7 +16,7 @@ export class AppUsersService {
 
   readonly appUserCollectionName = 'app-users';
 
-  selectedAppUser: AppUser = null; // = new AppUser();
+  selectedAppUser: AppUser = null;
   selectedAppUserChanged = new Subject<AppUser>();
   appUsers: AppUser[] = [];
 
@@ -46,12 +46,9 @@ export class AppUsersService {
   deleteAppUser(appUserId: string) {
     console.log('Deleting user w/ Id: ' + appUserId);
 
-
-    // const appUserId = this.selectedAppUser.id;
-    // this.selectedAppUser = new AppUser();
-    // return this._firestore
-    //   .doc(this.appUserCollectionName + '/' + appUserId)
-    //   .delete();
+    return this._firestore
+      .doc(this.appUserCollectionName + '/' + appUserId)
+      .delete();
   }
 
   load() {

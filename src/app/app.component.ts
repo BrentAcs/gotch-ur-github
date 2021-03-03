@@ -10,7 +10,7 @@ import { AppUser } from './shared/app-user.model';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  _appUsers: AppUser[] = [];
+  //_appUsers: AppUser[] = [];
 
   constructor(
     private appUserService: AppUsersService,

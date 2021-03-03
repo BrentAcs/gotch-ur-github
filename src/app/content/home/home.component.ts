@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AppUsersService } from '../../services/app-users/app-users.service';
@@ -58,13 +53,14 @@ export class HomeComponent
     return canDelete;
   }
 
+  onEditUser(appUserId: string) {}
+
   onDeleteUser(appUserId: string) {
-    console.log('onDeleteUser: ' + appUserId);
     this.appUsersService.deleteAppUser(appUserId);
-    this.homeForm.reset();
+    // this.homeForm.reset();
   }
 
-  onSubmit() {
+  onCreateUser() {
     console.log('submitting');
     console.log(this.persistSecretKey);
 
