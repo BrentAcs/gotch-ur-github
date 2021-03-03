@@ -7,7 +7,7 @@
       <!-- TODO: add validation to controls -->
       <!-- TODO: change to password and add 'show' toggle  -->
       <!-- TODO: determine be way to display the 'show/hide' functionality -->
-      <form (ngSubmit)="onSubmit()" #f="ngForm">
+      <form (ngSubmit)="onCreateUser()" #f="ngForm">
         <div class="form-group row">
           <label for="userName" class="col-md-2 col-form-label"
             >App User Name:</label
@@ -90,14 +90,6 @@
           >
             Save User
           </button>
-          <!-- <button
-            [disabled]="!canDeleteUser()"
-            class="btn btn-danger"
-            type="button"
-            (click)="onDeleteUser()"
-          >
-            Delete User
-          </button> -->
         </div>
       </form>
       <hr />
@@ -119,13 +111,13 @@
             <td>{{ appUser.accessToken }}</td>
             <td>{{ appUser.secretKey }}</td>
             <td>{{ appUser.persistSecretKey }}</td>
-            <td>{{ appUser.Id }}</td>
+            <td>{{ appUser.id }}</td>
             <td>
-              <button class="btn btn-primary btn-md" type="button">Edit</button>
+              <button class="btn btn-primary btn-md" type="button" (click)="onEditUser(appUser.id)">Edit</button>
               <button
                 class="btn btn-danger btn-md"
                 type="button"
-                (click)="onDeleteUser(appUser.Id)"
+                (click)="onDeleteUser(appUser.id)"
               >
                 Delete
               </button>
