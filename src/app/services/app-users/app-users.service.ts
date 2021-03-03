@@ -32,84 +32,38 @@ export class AppUsersService {
     return this._firestore.collection(this.appUserCollectionName).add(obj);
   }
 
+  getAppUser(appUserId: string) {
+    const appUser = this.appUsers.find((e) => {
+      return e.id === appUserId;
+    });
+    return appUser;
+  }
+
   readAppUsers() {
     return this._firestore
       .collection(this.appUserCollectionName)
       .snapshotChanges();
   }
 
-  updateAppUser() {
+  updateAppUser(appUserId: string, appUser: AppUser) {
+    console.log('Updating user w/ Id: ' + appUserId);
+
+    if (!appUserId) {
+      throw new Error('Failed updating user, no id specified');
+    }
+
+    const encrypedUser = AppUser.encrypt(appUser);
+    const obj = JSON.parse(JSON.stringify(encrypedUser));
     //   delete appUser.id;
-    //   this._fs.doc(this.appUserCollectionName + '/' + appUser.id ).update(appUser);
+    return this._firestore
+      .doc<AppUser>(this.appUserCollectionName + '/' + appUser.id)
+      .update(obj);
   }
 
   deleteAppUser(appUserId: string) {
-    console.log('Deleting user w/ Id: ' + appUserId);
-
+    // console.log('Deleting user w/ Id: ' + appUserId);
     return this._firestore
       .doc(this.appUserCollectionName + '/' + appUserId)
       .delete();
-  }
-
-  load() {
-    return this.readAppUsers();
-  }
-
-  save() {
-    console.log('app-users.service # save');
-
-    // LocalStorageService.setItem(AppUser.NAME_KEY, this.appUser.name);
-    // let persistSecretKey = 'false';
-    // if (this.appUser.persistSecretKey) {
-    //   persistSecretKey = this.appUser.persistSecretKey.toString();
-    // }
-    // // LocalStorageService.setItem(
-    // //   AppUser.USE_ACCESS_TOKEN_KEY,
-    // //   this.appUser.useAccessToken.toString()
-    // // );
-    // LocalStorageService.setItem(AppUser.PERSIST_SECRET_KEY, persistSecretKey);
-    // if (this.appUser.accessToken && this.appUser.secretKey) {
-    //   const encryptedAccessToken = CryptoService.encryptAES(
-    //     this.appUser.accessToken,
-    //     this.appUser.secretKey
-    //   );
-    //   LocalStorageService.setItem(
-    //     AppUser.ACCESS_TOKEN_KEY,
-    //     encryptedAccessToken
-    //   );
-    // } else {
-    //   console.warn('NOT persisting access token.');
-    // }
-    // if (this.appUser.secretKey && this.appUser.persistSecretKey) {
-    //   const encryptedSecretKey = CryptoService.encryptAES(
-    //     this.appUser.secretKey,
-    //     this.appUser.name
-    //   );
-    //   LocalStorageService.setItem(AppUser.SECRET_KEY, encryptedSecretKey);
-    // } else {
-    //   console.warn('NOT persisting secret key.');
-    // }
-  }
-
-  // TODO: Finish user persistance, need to work on clear/secure functionality
-  clear() {
-    console.log('app-users.service # load');
-
-    // this.appUser.reset();
-    // LocalStorageService.setItem(AppUser.NAME_KEY, this.appUser.name);
-    // LocalStorageService.setItem(
-    //   AppUser.ACCESS_TOKEN_KEY,
-    //   this.appUser.accessToken
-    // );
-    // // LocalStorageService.setItem(
-    // //   AppUser.USE_ACCESS_TOKEN_KEY,
-    // //   this.appUser.useAccessToken.toString()
-    // // );
-    // LocalStorageService.setItem(AppUser.SECRET_KEY, this.appUser.secretKey);
-    // LocalStorageService.setItem(
-    //   AppUser.PERSIST_SECRET_KEY,
-    //   this.appUser.persistSecretKey.toString()
-    // );
-    // this.appUserChanged.next(this.appUser);
   }
 }

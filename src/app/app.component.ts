@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.appUserService.load().subscribe((data) => {
+    this.appUserService.readAppUsers().subscribe((data) => {
       this.appUserService.appUsers = data.map((ele) => {
         const encryptedAppUser = {
           id: ele.payload.doc.id,

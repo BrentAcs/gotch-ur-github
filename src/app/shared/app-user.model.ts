@@ -3,12 +3,16 @@ import { CryptoService } from '../services/crypto/crypto.service';
 // TODO: Determine best practice was of handling this. a 'shared' folder on the root for models?
 export class AppUser {
   id = null;
+
   constructor(
     public name = '',
     public accessToken = '',
     public secretKey = '',
-    public persistSecretKey = false
-  ) {}
+    public persistSecretKey = false,
+    id = null
+  ) {
+    this.id = id;
+  }
 
   toObject() {
     return {
