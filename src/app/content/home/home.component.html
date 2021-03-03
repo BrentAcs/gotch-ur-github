@@ -101,7 +101,7 @@
             New User
           </button>
           <button
-            [disabled]="!(inNewMode || inEditMode) && !f.valid"
+            [disabled]="!canSaveUser()"
             class="btn btn-primary"
             type="submit"
           >

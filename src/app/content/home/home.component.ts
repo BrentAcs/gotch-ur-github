@@ -82,6 +82,17 @@ export class HomeComponent
     this.appUsersService.deleteAppUser(appUserId);
   }
 
+  canSaveUser() {
+    if (this.inNoneMode) {
+      return false;
+    }
+    if (this.homeForm.valid && this.userName !== '') {
+      return true;
+    }
+
+    return false;
+  }
+
   onCreateUser() {
     console.log('submitting');
     const newAppUser = new AppUser(
