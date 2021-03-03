@@ -1,10 +1,16 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AppSettingsService } from 'src/app/services/app-settings/app-settings.service';
-import { GithubClientService } from 'src/app/services/github/github-client.service';
 
 import { AppUsersService } from '../../services/app-users/app-users.service';
 import { BaseContentComponent } from '../base-content/base-content.component';
+import { AppSettingsService } from 'src/app/services/app-settings/app-settings.service';
+import { GithubClientService } from 'src/app/services/github/github-client.service';
+import { AppUser } from 'src/app/shared/app-user.model';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +21,11 @@ export class HomeComponent
   extends BaseContentComponent
   implements OnInit, OnDestroy {
   @ViewChild('f') homeForm: NgForm;
+  userName = '';
+  accessToken = '';
+  secretKey = '';
+  persistSecretKey = false;
+  newUserMode = false;
 
   constructor(
     appUsersService: AppUsersService,
@@ -33,14 +44,17 @@ export class HomeComponent
   }
 
   onNewUser() {
-    this.appUsersService.newUser();
+    this.newUserMode = true;
+    setTimeout(() => {
+      document.getElementById('userName').focus();
+    }, 0);
   }
 
   canDeleteUser() {
-    // console.log('can delete user');
-    // console.log(this.hasSelectedAppUser );
-    const canDelete = this.hasSelectedAppUser && this.appUsersService.selectedAppUser.id !== null;
-    // console.log(canDelete);
+    const canDelete =
+      this.newUserMode &&
+      this.hasSelectedAppUser &&
+      this.appUsersService.selectedAppUser.id !== null;
     return canDelete;
   }
 
@@ -50,14 +64,23 @@ export class HomeComponent
   }
 
   onSubmit() {
-    // TODO: going to need an 'editMode' property or similar soon
+    console.log('submitting');
+    console.log(this.persistSecretKey);
 
-    const savedUser = this.appUsersService.createAppUser().then((result) => {
-      console.log('home comp, added user:');
-      console.log(result);
-      this.appUsersService.selectedAppUser.id = result.id;
-    });
-
-    console.log(this.appUsersService.selectedAppUser);
+    const newAppUser = new AppUser(
+      this.userName,
+      this.accessToken,
+      this.secretKey,
+      this.persistSecretKey.valueOf()
+    );
+    console.log(newAppUser);
+    const savedUser = this.appUsersService
+      .createAppUser(newAppUser)
+      .then((result) => {
+        console.log('home comp, added user:');
+        console.log(result);
+        this.appUsersService.selectedAppUser.id = result.id;
+      });
+    this.newUserMode = false;
   }
 }

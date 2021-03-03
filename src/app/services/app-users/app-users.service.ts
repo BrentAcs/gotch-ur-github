@@ -22,28 +22,13 @@ export class AppUsersService {
 
   constructor(private _firestore: AngularFirestore) {}
 
-  newUser(){
-    if (this.selectedAppUser !== null) {
-      throw new Error('app users service a selected user!');
-    }
-    this.selectedAppUser = new AppUser();
-  }
-
-  createAppUser() {
+  createAppUser(newAppUser: AppUser) {
     console.log('creating app user in service');
 
-    if (this.selectedAppUser === null) {
-      throw new Error('app users service has no selected user!');
-    }
-    console.log(this.selectedAppUser);
-
-    if (!this.selectedAppUser) {
-      throw new Error('App Users Service has no selected app user.');
-    }
-
-    const encrypedUser = AppUser.encrypt(this.selectedAppUser);
+    const encrypedUser = AppUser.encrypt(newAppUser);
     const obj = JSON.parse(JSON.stringify(encrypedUser));
     delete obj.id;
+    this.selectedAppUser = newAppUser;
     return this._firestore.collection(this.appUserCollectionName).add(obj);
   }
 
@@ -67,7 +52,6 @@ export class AppUsersService {
   }
 
   load() {
-    // console.log('app-users.service # load');
     return this.readAppUsers();
   }
 
