@@ -54,9 +54,9 @@ export class AppUsersService {
 
     const encrypedUser = AppUser.encrypt(appUser);
     const obj = JSON.parse(JSON.stringify(encrypedUser));
-    //   delete appUser.id;
+    delete obj.id;
     return this._firestore
-      .doc<AppUser>(this.appUserCollectionName + '/' + appUser.id)
+      .doc<AppUser>(this.appUserCollectionName + '/' + appUserId)
       .update(obj);
   }
 
