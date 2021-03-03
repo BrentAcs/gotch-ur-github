@@ -43,12 +43,15 @@ export class AppUsersService {
     //   this._fs.doc(this.appUserCollectionName + '/' + appUser.id ).update(appUser);
   }
 
-  deleteAppUser() {
-    const appUserId = this.selectedAppUser.id;
-    this.selectedAppUser = new AppUser();
-    return this._firestore
-      .doc(this.appUserCollectionName + '/' + appUserId)
-      .delete();
+  deleteAppUser(appUserId: string) {
+    console.log('Deleting user w/ Id: ' + appUserId);
+
+
+    // const appUserId = this.selectedAppUser.id;
+    // this.selectedAppUser = new AppUser();
+    // return this._firestore
+    //   .doc(this.appUserCollectionName + '/' + appUserId)
+    //   .delete();
   }
 
   load() {

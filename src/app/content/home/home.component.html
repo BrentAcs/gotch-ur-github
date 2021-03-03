@@ -109,6 +109,7 @@
             <th scope="col">Access Token</th>
             <th scope="col">Secret Key</th>
             <th scope="col">Persist</th>
+            <th scope="col">Id</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -118,9 +119,16 @@
             <td>{{ appUser.accessToken }}</td>
             <td>{{ appUser.secretKey }}</td>
             <td>{{ appUser.persistSecretKey }}</td>
+            <td>{{ appUser.Id }}</td>
             <td>
               <button class="btn btn-primary btn-md" type="button">Edit</button>
-              <button class="btn btn-danger btn-md" type="button">Delete</button>
+              <button
+                class="btn btn-danger btn-md"
+                type="button"
+                (click)="onDeleteUser(appUser.Id)"
+              >
+                Delete
+              </button>
             </td>
           </tr>
         </tbody>

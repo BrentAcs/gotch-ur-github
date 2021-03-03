@@ -58,8 +58,9 @@ export class HomeComponent
     return canDelete;
   }
 
-  onDeleteUser() {
-    this.appUsersService.deleteAppUser();
+  onDeleteUser(appUserId: string) {
+    console.log('onDeleteUser: ' + appUserId);
+    this.appUsersService.deleteAppUser(appUserId);
     this.homeForm.reset();
   }
 
