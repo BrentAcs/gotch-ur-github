@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { AppSettingsService } from './services/app-settings/app-settings.service';
 import { AppUsersService } from './services/app-users/app-users.service';
 import { AppUser } from './shared/app-user.model';
-import { FirebaseClientService } from './services/firebase/firebase-client.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +15,6 @@ export class AppComponent implements OnInit {
   constructor(
     private appUserService: AppUsersService,
     private appSettingsService: AppSettingsService,
-    private _fs: FirebaseClientService
   ) {}
 
   ngOnInit() {
@@ -33,8 +31,8 @@ export class AppComponent implements OnInit {
           this.appUserService.selectedAppUser = appUser;
         }
 
-        console.log('mapping app user');
-        console.log(appUser);
+        // console.log('mapping app user');
+        // console.log(appUser);
         return appUser;
       });
     });
