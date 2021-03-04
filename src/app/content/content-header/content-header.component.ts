@@ -9,15 +9,21 @@ import { BaseContentComponent } from '../base-content/base-content.component';
   templateUrl: './content-header.component.html',
   styleUrls: ['./content-header.component.css'],
 })
-export class ContentHeaderComponent extends BaseContentComponent implements OnInit {
+export class ContentHeaderComponent
+  extends BaseContentComponent
+  implements OnInit {
+  selectedAppUserId = '';
+
   constructor(
     appUsersService: AppUsersService,
     appSettingsService: AppSettingsService
   ) {
-    super( appUsersService, appSettingsService, null);
+    super(appUsersService, appSettingsService, null);
   }
 
-  onSelectedUserChange(appUserName){
+  onSelectedUserChange(appUserId) {
+    console.log('selected User Changed: ' + appUserId);
+    console.log('selected User Id: ' + this.selectedAppUserId);
   }
 
   ngOnInit(): void {}

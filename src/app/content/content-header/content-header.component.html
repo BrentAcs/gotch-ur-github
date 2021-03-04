@@ -1,25 +1,25 @@
 <div class="form-group row">
-  <div class="col-md-12">
-    <div class="form-group row col-md-12">
-      <div class="form-group col-md-2">
-        <label class="form-label" class="col-form-label" for="">
-          <span class="form-label" *ngIf="!hasSelectedAppUser"><strong>Create an App User</strong></span>
-          <span class="form-label" *ngIf="hasSelectedAppUser">Available Users:</span>
+  <!-- <div class="col-md-12"> -->
+    <div class="row col-md-12">
+      <div class="form-group col-md-3">
+        <label class="form-label" class="col-form-label" for="selectedUser">
+          <span class="form-label" *ngIf="!appUsersService.hasAppUsers"><strong>Create an App User</strong></span>
+          <span class="form-label" *ngIf="appUsersService.hasAppUsers">Available Users:</span>
         </label>
         <select
-          *ngIf="hasSelectedAppUser"
+          *ngIf="appUsersService.hasAppUsers"
           class="form-select"
           #appUserSelect
           (change)="onSelectedUserChange(appUserSelect.value)"
-          [(ngModel)]="appUsersService.selectedAppUser.name"
+          comment='[(ngModel)]="appUsersService.selectedAppUser.name"'
           class="dropdown"
-          ngModel
-          name="gitIgnoreTemplates"
-          id="gitIgnoreTemplates"
+          [(ngModel)]="selectedAppUserId"
+          name="selectedUser"
+          id="selectedUser"
         >
           <option
             *ngFor="let appUser of appUsersService.appUsers"
-            [value]="appUser.name"
+            [value]="appUser.id"
           >
             {{ appUser.name }}
           </option>
@@ -41,5 +41,5 @@
         </span>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </div>

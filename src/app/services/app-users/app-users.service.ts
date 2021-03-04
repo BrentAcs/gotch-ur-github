@@ -22,6 +22,10 @@ export class AppUsersService {
 
   constructor(private _firestore: AngularFirestore) {}
 
+  get hasAppUsers() {
+    return this.appUsers.length > 0;
+  }
+
   createAppUser(newAppUser: AppUser) {
     console.log('creating app user in service');
 
