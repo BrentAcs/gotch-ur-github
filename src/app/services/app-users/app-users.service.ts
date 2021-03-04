@@ -16,14 +16,25 @@ export class AppUsersService {
 
   readonly appUserCollectionName = 'app-users';
 
-  selectedAppUser: AppUser = null;
+  private _selectedAppUser: AppUser = null;
+  private _appUsers: AppUser[] = [];
   selectedAppUserChanged = new Subject<AppUser>();
-  appUsers: AppUser[] = [];
 
   constructor(private _firestore: AngularFirestore) {}
 
+  get appUsers() {
+    return this._appUsers.slice();
+  }
+  set appUsers(users: AppUser[]) {
+    this._appUsers = users;
+  }
+
+  get selectedAppUser(){
+    return this._selectedAppUser;
+  }
+
   get hasAppUsers() {
-    return this.appUsers.length > 0;
+    return this._appUsers.length > 0;
   }
 
   createAppUser(newAppUser: AppUser) {
@@ -32,12 +43,12 @@ export class AppUsersService {
     const encrypedUser = AppUser.encrypt(newAppUser);
     const obj = JSON.parse(JSON.stringify(encrypedUser));
     delete obj.id;
-    this.selectedAppUser = newAppUser;
+    this._selectedAppUser = newAppUser;
     return this._firestore.collection(this.appUserCollectionName).add(obj);
   }
 
   getAppUser(appUserId: string) {
-    const appUser = this.appUsers.find((e) => {
+    const appUser = this._appUsers.find((e) => {
       return e.id === appUserId;
     });
     return appUser;
