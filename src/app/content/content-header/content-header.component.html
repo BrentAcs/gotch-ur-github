@@ -17,11 +17,9 @@
           class="form-select"
           #appUserSelect
           (change)="onSelectedUserChange(appUserSelect.value)"
-          comment='[(ngModel)]="appUsersService.selectedAppUser.name"'
           class="dropdown"
-          [(ngModel)]="selectedAppUserId"
-          name="selectedUser"
-          id="selectedUser"
+          xx-name="selectedUser"
+          xx-id="selectedUser"
         >
           <option
             *ngFor="let appUser of appUsersService.appUsers"

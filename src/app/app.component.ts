@@ -10,8 +10,6 @@ import { AppUser } from './shared/app-user.model';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  //_appUsers: AppUser[] = [];
-
   constructor(
     private appUserService: AppUsersService,
     private appSettingsService: AppSettingsService,
@@ -27,9 +25,10 @@ export class AppComponent implements OnInit {
         } as AppUser;
         const appUser = AppUser.decrypt(encryptedAppUser);
 
-        // if (this.appUserService.selectedAppUser !== null) {
-        //   this.appUserService.selectedAppUser = appUser;
-        // }
+        if (this.appUserService.selectedAppUser === null) {
+          console.log('setting selected app user from app-root: ' + appUser.id);
+          this.appUserService.setSelectedAppUser( appUser.id );
+        }
 
         // console.log('mapping app user');
         // console.log(appUser);

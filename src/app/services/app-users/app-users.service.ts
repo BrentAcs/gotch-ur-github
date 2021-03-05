@@ -29,8 +29,12 @@ export class AppUsersService {
     this._appUsers = users;
   }
 
-  get selectedAppUser(){
+  get selectedAppUser() {
     return this._selectedAppUser;
+  }
+
+  setSelectedAppUser(id: string) {
+    this._selectedAppUser = this.getAppUser(id);
   }
 
   get hasAppUsers() {

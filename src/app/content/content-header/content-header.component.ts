@@ -1,4 +1,12 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 
 import { AppSettingsService } from 'src/app/services/app-settings/app-settings.service';
 import { AppUsersService } from 'src/app/services/app-users/app-users.service';
@@ -11,9 +19,9 @@ import { BaseContentComponent } from '../base-content/base-content.component';
 })
 export class ContentHeaderComponent
   extends BaseContentComponent
-  implements OnInit {
-  @ViewChild('appUserSelect', {static: true}) appUserSelect: ElementRef;
-  selectedAppUserId = '';
+  implements OnInit, AfterViewInit {
+  @ViewChild('appUserSelect', { static: true }) appUserSelect: ElementRef;
+  //@Input('appUserSelect') appUserSelect: string;
 
   constructor(
     appUsersService: AppUsersService,
@@ -24,13 +32,28 @@ export class ContentHeaderComponent
 
   onSelectedUserChange(appUserId) {
     console.log('selected User Changed: ' + appUserId);
-    console.log('selected User Id: ' + this.selectedAppUserId);
+
+    console.log('prior selected app user: ');
+    console.log(this.appUsersService.selectedAppUser);
+
+    this.appUsersService.setSelectedAppUser(appUserId);
+
+    console.log('post selected app user: ');
+    console.log(this.appUsersService.selectedAppUser);
   }
 
   ngOnInit(): void {
-    if (this.selectedAppUserId === '') {
-      console.log('setting selected user.');
-      // this.appUserSelect.nativeElement.selectedIndex = 0;
+    if (!this.appUsersService.selectedAppUser) {
+      console.log('head onInit: ');
+      console.log(this.appUserSelect);
+      // console.log(this.appUserSelect);
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.appUsersService.selectedAppUser) {
+      console.log('head afterViewInit: ');
+      console.log(this.appUserSelect);
     }
   }
 }

@@ -28,8 +28,8 @@ export class LoggingInterceptorService implements HttpInterceptor {
     return next.handle(req).pipe(
       tap((event) => {
         if (event.type === HttpEventType.Response) {
-          this.loggingService.log('Logging HTTP Response');
-          this.loggingService.log(event);
+          // this.loggingService.log('Logging HTTP Response');
+          // this.loggingService.log(event);
         }
       })
     );
