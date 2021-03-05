@@ -14,6 +14,8 @@ export class CryptoService {
 
   static decryptAES(data, secretKey) {
     try {
+      console.log('CryptoService, data:');
+      console.log(data);
       const bytes = CryptoJS.AES.decrypt(data, secretKey);
       if (bytes.toString()) {
         return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
