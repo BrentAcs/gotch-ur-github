@@ -30,6 +30,9 @@ export class AppComponent implements OnInit {
         } as AppUser;
         const appUser = AppUser.decrypt(encryptedAppUser);
 
+        console.log('decrypted user: ');
+        console.log(appUser);
+
         if (this.appUserService.selectedAppUser === null) {
           console.log('setting selected app user from app-root: ' + appUser.id);
           this.appUserService.setSelectedAppUser(appUser.id);
