@@ -65,7 +65,7 @@ export class AppUser {
         appUser.name
       );
     }
-    if (appUser.accessToken?.length > 0 && newAppUser.secretKey.length > 0) {
+    if (appUser.accessToken?.length > 0 ) {
       newAppUser.accessToken = CryptoService.decryptAES(
         appUser.accessToken,
         newAppUser.secretKey
